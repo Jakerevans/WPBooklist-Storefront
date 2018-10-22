@@ -148,6 +148,8 @@ global $wpdb;
 	// Runs once upon extension activation and adds it's version number to the 'extensionversions' column in the 'wpbooklist_jre_user_options' table of the core plugin.
 	register_activation_hook( __FILE__, array( $storefront_general_functions, 'wpbooklist_storefront_record_extension_version' ) );
 
+	// Function that adds in the HTML into the 'Add a Book' form.
+	add_filter( 'wpbooklist_append_to_book_form_storefront_fields', array( $storefront_general_functions, 'wpbooklist_storefront_insert_storefront_fields' ) );
 
 
 /* END OF FUNCTIONS FOUND IN CLASS-WPBOOKLIST-GENERAL-FUNCTIONS.PHP THAT APPLY PLUGIN-WIDE */
