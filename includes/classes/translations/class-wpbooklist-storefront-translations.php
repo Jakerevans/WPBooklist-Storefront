@@ -52,10 +52,36 @@ if ( ! class_exists( 'WPBookList_StoreFront_Translations', false ) ) :
 			$this->trans_21 = __( 'Enable Reviews', 'wpbooklist-textdomain' );
 			$this->trans_22 = __( 'Purchase Now', 'wpbooklist-textdomain' );
 			$this->trans_23 = __( 'Select a Category...', 'wpbooklist-textdomain' );
+			$this->trans_24 = __( 'Yes', 'wpbooklist-textdomain' );
+			$this->trans_25 = __( 'No', 'wpbooklist-textdomain' );
 
 			// The array of translation strings.
 			$translation_array = array(
-				'trans1' => $this->trans_1,
+				'trans1'  => $this->trans_1,
+				'trans2'  => $this->trans_2,
+				'trans3'  => $this->trans_3,
+				'trans4'  => $this->trans_4,
+				'trans5'  => $this->trans_5,
+				'trans6'  => $this->trans_6,
+				'trans7'  => $this->trans_7,
+				'trans8'  => $this->trans_8,
+				'trans9'  => $this->trans_9,
+				'trans10' => $this->trans_10,
+				'trans11' => $this->trans_11,
+				'trans12' => $this->trans_12,
+				'trans13' => $this->trans_13,
+				'trans14' => $this->trans_14,
+				'trans15' => $this->trans_15,
+				'trans16' => $this->trans_16,
+				'trans17' => $this->trans_17,
+				'trans18' => $this->trans_18,
+				'trans19' => $this->trans_19,
+				'trans20' => $this->trans_20,
+				'trans21' => $this->trans_21,
+				'trans22' => $this->trans_22,
+				'trans23' => $this->trans_23,
+				'trans24' => $this->trans_24,
+				'trans25' => $this->trans_25,
 			);
 
 			return $translation_array;
