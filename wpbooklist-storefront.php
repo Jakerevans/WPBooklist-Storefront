@@ -88,7 +88,7 @@ global $wpdb;
 	// Nonces array.
 	define( 'STOREFRONT_NONCES_ARRAY',
 		wp_json_encode(array(
-			'adminnonce1' => 'wpbooklist_storefront_functionname_action_callback',
+			'adminnonce1' => 'wpbooklist_storefront_settings_action_callback',
 		))
 	);
 
@@ -158,6 +158,13 @@ global $wpdb;
 
 	// For receiving user feedback upon deactivation & deletion.
 	add_action( 'wp_ajax_storefront_exit_results_action', array( $storefront_ajax_functions, 'storefront_exit_results_action_callback' ) );
+
+	add_action( 'wp_ajax_wpbooklist_storefront_settings_action', array( $storefront_ajax_functions, 'wpbooklist_storefront_settings_action_callback' ) );
+
+
+	
+
+
 
 /* END OF FUNCTIONS FOUND IN CLASS-WPBOOKLIST-AJAX-FUNCTIONS.PHP THAT APPLY PLUGIN-WIDE */
 

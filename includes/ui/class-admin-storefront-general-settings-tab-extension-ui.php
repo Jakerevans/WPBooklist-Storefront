@@ -23,7 +23,7 @@ if ( ! class_exists( 'WPBookList_StoreFront', false ) ) :
 		 */
 		public function __construct() {
 			require_once CLASS_DIR . 'class-admin-ui-template.php';
-			require_once STOREFRONT_CLASS_DIR . 'class-storefront-form.php';
+			require_once STOREFRONT_CLASS_DIR . 'class-wpbooklist-storefront-form.php';
 
 			// Get Translations.
 			require_once STOREFRONT_CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-storefront-translations.php';
@@ -42,30 +42,30 @@ if ( ! class_exists( 'WPBookList_StoreFront', false ) ) :
 		/**
 		 * Opens the admin container for the tab
 		 */
-		private function output_open_admin_container(){
-			$title = 'StoreFront General Settings';
-			$icon_url = STOREFRONT_ROOT_IMG_URL.'book.svg';
-			echo $this->template->output_open_admin_container($title, $icon_url);
+		private function output_open_admin_container() {
+			$title    = $this->trans->storefront_trans_26;
+			$icon_url = STOREFRONT_ROOT_IMG_URL . 'book.svg';
+			echo $this->template->output_open_admin_container( $title, $icon_url );
 		}
 
 		/**
 		 * Outputs actual tab contents
 		 */
-		private function output_tab_content(){
+		private function output_tab_content() {
 			echo $this->form->output_storefront_form();
 		}
 
 		/**
 		 * Closes admin container
 		 */
-		private function output_close_admin_container(){
+		private function output_close_admin_container() {
 			echo $this->template->output_close_admin_container();
 		}
 
 		/**
 		 * Outputs advertisment area
 		 */
-		private function output_admin_template_advert(){
+		private function output_admin_template_advert() {
 			echo $this->template->output_template_advert();
 		}
 
@@ -73,5 +73,5 @@ if ( ! class_exists( 'WPBookList_StoreFront', false ) ) :
 	}
 endif;
 
-// Instantiate the class
-$cm = new WPBookList_StoreFront;
+// Instantiate the class.
+$cm = new WPBookList_StoreFront();

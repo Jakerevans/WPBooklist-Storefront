@@ -23,3 +23,57 @@
 	pointer-events:none;
 }
 
+.wpbooklist-storefront-title-label {
+    display: block;
+}
+
+#wpbooklist-storefront-container-div {
+    text-align: center;
+    line-height: 1.4;
+}
+
+#wpbooklist-storefront-call-to-action-input {
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+#wpbooklist-storefront-bottom-title {
+    margin-top: 40px;
+}
+
+#wpbooklist-storefront-image-div {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom:50px;
+}
+
+#wpbooklist-storefront-image-div .wpbooklist-storefront-preview-img, #wpbooklist-storefront-colorbox-image-div .wpbooklist-storefront-preview-img {
+    max-width: 60px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+#wpbooklist-storefront-container-div .wpbooklist-color-orange-italic{
+	display:block;
+}
+
+#wpbooklist-storefront-text-div{
+	margin-top: 50px;
+}
+
+#wpbooklist-storefront-library-buy-img-div{
+	margin-top:23px;
+}
+
+#wpbooklist-storefront-save-settings{
+	position: relative;
+    top: 30px;
+}

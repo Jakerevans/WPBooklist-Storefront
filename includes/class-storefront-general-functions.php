@@ -108,11 +108,21 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 			require_once STOREFRONT_CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-storefront-translations.php';
 			$trans = new WPBookList_StoreFront_Translations();
 
-			// Localize the script with the appropriate translation array from the Translations class.
+			// Get Core translations.
+			require_once CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-translations.php';
+			$coretrans = new WPBookList_Translations();
+
+			// Localize the script with the appropriate translation array from this Extension's Translations class.
 			$translation_array1 = $trans->trans_strings();
+
+			// Localize the script with the appropriate translation array from the Core Translations class.
+			$translation_array2 = $coretrans->trans_strings();
 
 			// Now grab all of our Nonces to pass to the JavaScript for the Ajax functions and merge with the Translations array.
 			$final_array_of_php_values = array_merge( $translation_array1, json_decode( STOREFRONT_FINAL_NONCES_ARRAY, true ) );
+
+			// Now merge in the Core translations.
+			//$final_array_of_php_values = array_merge( $final_array_of_php_values, $translation_array2 );
 
 			// Adding some other individual values we may need.
 			$final_array_of_php_values['STOREFRONT_ROOT_IMG_ICONS_URL'] = STOREFRONT_ROOT_IMG_ICONS_URL;
