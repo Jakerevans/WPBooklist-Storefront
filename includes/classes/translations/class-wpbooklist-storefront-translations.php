@@ -69,6 +69,7 @@ if ( ! class_exists( 'WPBookList_StoreFront_Translations', false ) ) :
 			$this->storefront_trans_38 = __( 'Book View Purchase Image', 'wpbooklist-textdomain' );
 			$this->storefront_trans_39 = __( 'Save StoreFront Settings', 'wpbooklist-textdomain' );
 			$this->storefront_trans_40 = __( 'You\'ve saved your StoreFront Settings!', 'wpbooklist-textdomain' );
+			$this->storefront_trans_41 = __( 'StoreFront WooCommerce Settings', 'wpbooklist-textdomain' );
 
 
 

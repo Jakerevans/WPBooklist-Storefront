@@ -222,7 +222,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 			$this->storefront_trans = new WPBookList_Storefront_Translations();
 			$this->storefront_trans->trans_strings();
 
-			$purchasetext = $this->storefront_trans->trans_22 . '!';
+			$purchasetext = $this->storefront_trans->storefront_trans_22 . '!';
 
 			// Creating the table.
 			$sql_create_table = "CREATE TABLE {$wpdb->wpbooklist_jre_storefront_options} 
@@ -275,7 +275,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 			$this->trans->trans_strings();
 
 			$string1            = '';
-			$product_categories = '<option selected default disabled value="' . $this->storefront_trans->trans_23 . '">' . $this->storefront_trans->trans_23 . '</option>';
+			$product_categories = '<option selected default disabled value="' . $this->storefront_trans->storefront_trans_23 . '">' . $this->storefront_trans->storefront_trans_23 . '</option>';
 			$string3            = '';
 			$string4            = '';
 
@@ -354,27 +354,27 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 				<div id="wpbooklist-addbook-select-library-label">
 					<p>
 						<img class="wpbooklist-icon-image-question-with-link" data-label="book-storefront-fields-heading" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg"/>
-						' . $this->storefront_trans->trans_2 . '
+						' . $this->storefront_trans->storefront_trans_2 . '
 					</p>
 				</div>';
 
 			$body_one = '
 				<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 					<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-					<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_3 . '</label>
+					<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_3 . '</label>
 					<input name="book-price" id="wpbooklist-addbook-price" name="book-price" type="text" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 				</div>
 				<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 					<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-					<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_4 . '</label>
+					<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_4 . '</label>
 					<input name="book-sale-author-link" type="text" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 				</div>
 				<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-exception">
 					<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="http://localhost/local/wp-content/plugins/wpbooklist/assets/img/icons/question-black.svg">
-					<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->trans_5 . '?</label>
+					<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->storefront_trans_5 . '?</label>
 					<select class="wpbooklist-addbook-select-default" id="wpbooklist-addbook-storefront-select-woocommerce">
-						<option>' . $this->storefront_trans->trans_24 . '</option>
-						<option selected default>' . $this->storefront_trans->trans_25 . '</option>
+						<option>' . $this->storefront_trans->storefront_trans_24 . '</option>
+						<option selected default>' . $this->storefront_trans->storefront_trans_25 . '</option>
 					</select>
 				</div>';
 
@@ -382,65 +382,65 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 				<div id="wpbooklist-book-form-storefront-initial-hidden-fields">
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_6 . '</label>
+						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_6 . '</label>
 						<input name="book-woo-regular-price" id="wpbooklist-addbook-woo-regular-woo-price" type="text" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_7 . '</label>
+						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_7 . '</label>
 						<input name="book-woo-sale-price" id="wpbooklist-addbook-woo-sale-price" type="text" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_15 . '</label>
+						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_15 . '</label>
 						<input name="book-woo-sku" id="wpbooklist-addbook-woo-sku" type="text" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_8 . '</label>
+						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_8 . '</label>
 						<input name="book-woo-salebegin" id="wpbooklist-addbook-woo-salebegin" type="date" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_9 . '</label>
+						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_9 . '</label>
 						<input name="book-woo-saleend" id="wpbooklist-addbook-woo-saleend" type="date" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_10 . '</label>
+						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_10 . '</label>
 						<input name="book-woo-width" id="wpbooklist-addbook-woo-width" type="number" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_11 . '</label>
+						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_11 . '</label>
 						<input name="book-woo-height" id="wpbooklist-addbook-woo-height" type="number" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_12 . '</label>
+						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_12 . '</label>
 						<input name="book-woo-weight" id="wpbooklist-addbook-woo-weight" type="number" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_13 . '</label>
+						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_13 . '</label>
 						<input name="book-woo-length" id="wpbooklist-addbook-woo-length" type="number" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_14 . '</label>
+						<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_14 . '</label>
 						<input name="book-woo-stock" id="wpbooklist-addbook-woo-stock" type="number" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-exception">
 						<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-storefront-up-cross">
 							<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-							<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_16 . '</label>
+							<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_16 . '</label>
 							<select class="storefront-select2-upsells select2-storefront-container wpbooklist-addbook-select-default" name="upsellproducts[]" data-customfield-type="plaintextentry" multiple="multiple">
 		                        ' . $sells . '
 		                    </select>
 						</div>
 						<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-storefront-up-cross">
 							<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
-							<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->trans_17 . '</label>
+							<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_17 . '</label>
 							<select class="storefront-select2-crosssells select2-storefront-container wpbooklist-addbook-select-default" name="upsellproducts[]" data-customfield-type="plaintextentry" multiple="multiple">
 		                        ' . $sells . '
 		                    </select>
@@ -451,14 +451,14 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-exception">
 						<div class="wpbooklist-book-form-indiv-attribute-container">
 							<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="http://localhost/local/wp-content/plugins/wpbooklist/assets/img/icons/question-black.svg">
-							<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->trans_19 . ':</label>
+							<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->storefront_trans_19 . ':</label>
 							<select id="wpbooklist-woocommerce-category-select" class="wpbooklist-addbook-select-default">
 								' . $product_categories . '
 							</select>
 						</div>
 						<div class="wpbooklist-book-form-indiv-attribute-container">
 							<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="http://localhost/local/wp-content/plugins/wpbooklist/assets/img/icons/question-black.svg">
-							<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->trans_20 . '?</label>
+							<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->storefront_trans_20 . '?</label>
 							<select class="wpbooklist-addbook-select-default" id="wpbooklist-woocommerce-virtual-select">
 								<option>' . $this->trans->trans_131 . '</option>
 								<option selected default>' . $this->trans->trans_132 . '</option>
@@ -466,7 +466,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 						</div>
 						<div class="wpbooklist-book-form-indiv-attribute-container">
 							<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="http://localhost/local/wp-content/plugins/wpbooklist/assets/img/icons/question-black.svg">
-							<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->trans_21 . '?</label>
+							<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->storefront_trans_21 . '?</label>
 							<select class="wpbooklist-addbook-select-default" id="wpbooklist-woocommerce-enable-reviews-select">
 								<option>' . $this->trans->trans_131 . '</option>
 								<option selected default>' . $this->trans->trans_132 . '</option>
@@ -475,7 +475,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container">
 						<img class="wpbooklist-icon-image-question" data-label="book-form-shortdescription" src="http://localhost/local/wp-content/plugins/wpbooklist/assets/img/icons/question-black.svg">
-						<label class="wpbooklist-question-icon-label" for="book-shortdescription">' . $this->storefront_trans->trans_18 . '</label>
+						<label class="wpbooklist-question-icon-label" for="book-shortdescription">' . $this->storefront_trans->storefront_trans_18 . '</label>
 						<textarea name="book-woo-note" id="wpbooklist-addbook-storefront-purchasenote" name="book-shortdescription"></textarea>
 					</div>';
 
