@@ -60,7 +60,7 @@ gulp.task( 'sassBackendSource', function() {
 // Task to concatenate and uglify js files
 gulp.task( 'concatAdminJs', function() {
 	gulp.src(jsBackendSource ) // use jsSources
-		.pipe(concat( 'wpbooklist_storefront_admin.min.js' ) ) // Concat to a file named 'script.js'
+		.pipe(concat( 'wpbooklist-storefront_admin.min.js' ) ) // Concat to a file named 'script.js'
 		.pipe(uglify() ) // Uglify concatenated file
 		.pipe(gulp.dest( 'assets/js' ) ); // The destination for the concatenated and uglified file
 });
@@ -68,51 +68,51 @@ gulp.task( 'concatAdminJs', function() {
 // Task to concatenate and uglify js files
 gulp.task( 'concatFrontendJs', function() {
 	gulp.src(jsFrontendSource ) // use jsSources
-		.pipe(concat( 'wpbooklist_storefront_frontend.min.js' ) ) // Concat to a file named 'script.js'
+		.pipe(concat( 'wpbooklist-storefront_frontend.min.js' ) ) // Concat to a file named 'script.js'
 		.pipe(uglify() ) // Uglify concatenated file
 		.pipe(gulp.dest( 'assets/js' ) ); // The destination for the concatenated and uglified file
 });
 
 gulp.task( 'copyassets', function () {
-	gulp.src([ './assets/**/*' ], {base: './'}).pipe(gulp.dest( '../wpbooklist_dist/WPBookList-Distribution' ) );
+	gulp.src([ './assets/**/*' ], {base: './'}).pipe(gulp.dest( '../wpbooklist-storefront_dist' ) );
 });
 
 gulp.task( 'copyincludes', function () {
-	gulp.src([ './includes/**/*' ], {base: './'}).pipe(gulp.dest( '../wpbooklist_dist/WPBookList-Distribution' ) );
+	gulp.src([ './includes/**/*' ], {base: './'}).pipe(gulp.dest( '../wpbooklist-storefront_dist' ) );
 });
 
 gulp.task( 'copyquotes', function () {
-	gulp.src([ './quotes/**/*' ], {base: './'}).pipe(gulp.dest( '../wpbooklist_dist/WPBookList-Distribution' ) );
+	gulp.src([ './quotes/**/*' ], {base: './'}).pipe(gulp.dest( '../wpbooklist-storefront_dist' ) );
 });
 
 gulp.task( 'copyconfig', function () {
-	gulp.src([ './wpbooklistconfig.ini' ], {base: './'}).pipe(gulp.dest( '../wpbooklist_dist/WPBookList-Distribution' ) );
+	gulp.src([ './wpbooklistconfig.ini' ], {base: './'}).pipe(gulp.dest( '../wpbooklist-storefront_dist' ) );
 });
 
 gulp.task( 'copyreadme', function () {
-	gulp.src([ './readme.txt' ], {base: './'}).pipe(gulp.dest( '../wpbooklist_dist/WPBookList-Distribution' ) );
+	gulp.src([ './readme.txt' ], {base: './'}).pipe(gulp.dest( '../wpbooklist-storefront_dist' ) );
 });
 
 gulp.task( 'copylang', function () {
-	gulp.src([ './languages/**/*' ], {base: './'}).pipe(gulp.dest( '../wpbooklist_dist/WPBookList-Distribution' ) );
+	gulp.src([ './languages/**/*' ], {base: './'}).pipe(gulp.dest( '../wpbooklist-storefront_dist' ) );
 });
 
 gulp.task( 'copymainfile', function () {
-	gulp.src([ './wpbooklist.php' ], {base: './'}).pipe(gulp.dest( '../wpbooklist_dist/WPBookList-Distribution' ) );
+	gulp.src([ './wpbooklist-storefront.php' ], {base: './'}).pipe(gulp.dest( '../wpbooklist-storefront_dist' ) );
 });
 
 gulp.task( 'zip', function () {
-	return gulp.src( '../wpbooklist_dist/WPBookList-Distribution/**' )
-		.pipe(zip( 'wpbooklist.zip' ) )
-		.pipe(gulp.dest( '../wpbooklist_dist/WPBookList-Distribution' ) );
+	return gulp.src( '../wpbooklist-storefront_dist/**' )
+		.pipe(zip( 'wpbooklist-storefront.zip' ) )
+		.pipe(gulp.dest( '../wpbooklist-storefront_dist' ) );
 });
 
 gulp.task( 'cleanzip', function(cb) {
-	del([ '../wpbooklist_dist/WPBookList-Distribution/**/*' ], {force: true}, cb);
+	del([ '../wpbooklist-storefront_dist/**/*' ], {force: true}, cb);
 });
 
 gulp.task( 'clean', function(cb) {
-	del([ '../wpbooklist_dist/WPBookList-Distribution/**/*', '!../wpbooklist_dist/WPBookList-Distribution/wpbooklist.zip' ], {force: true}, cb);
+	del([ '../wpbooklist-storefront_dist/**/*', '!../wpbooklist-storefront_dist/wpbooklist-storefront.zip' ], {force: true}, cb);
 });
 
 // Task to watch for changes in our file sources
