@@ -19,7 +19,7 @@ if ( ! class_exists( 'StoreFront_Ajax_Functions', false ) ) :
 	class StoreFront_Ajax_Functions {
 
 		/**
-		 * Class Constructor - Simply calls the Translations
+		 * Class Constructor - Simply calls the Translations.
 		 */
 		public function __construct() {
 

@@ -119,6 +119,10 @@ global $wpdb;
 	// Function that loads up the menu page entry for this Extension.
 	add_filter( 'wpbooklist_add_sub_menu', array( $storefront_general_functions, 'wpbooklist_storefront_submenu' ) );
 
+	add_filter( 'wpbooklist_add_to_library_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_library_view_display_options' ) );
+
+	add_filter( 'wpbooklist_add_to_book_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_book_view_display_options' ) );
+
 	// Adding the function that will take our STOREFRONT_NONCES_ARRAY Constant from above and create actual nonces to be passed to Javascript functions.
 	add_action( 'init', array( $storefront_general_functions, 'wpbooklist_storefront_create_nonces' ) );
 

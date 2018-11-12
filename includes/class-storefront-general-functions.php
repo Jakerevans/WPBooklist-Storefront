@@ -18,6 +18,23 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 	 */
 	class StoreFront_General_Functions {
 
+		/**
+		 * Class Constructor - Simply calls the Translations.
+		 */
+		public function __construct() {
+
+			// Get StoreFront Translations.
+			require_once STOREFRONT_CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-storefront-translations.php';
+			$this->storefront_trans = new WPBookList_Storefront_Translations();
+			$this->storefront_trans->trans_strings();
+
+			// Get Core Translations.
+			require_once CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-translations.php';
+			$this->trans = new WPBookList_Translations();
+			$this->trans->trans_strings();
+
+		}
+
 		/** Functions that loads up the menu page entry for this Extension.
 		 *
 		 *  @param array $submenu_array - The array that contains submenu entries to add to.
@@ -265,16 +282,6 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 
 			global $wpdb;
 
-			// Get StoreFront Translations.
-			require_once STOREFRONT_CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-storefront-translations.php';
-			$this->storefront_trans = new WPBookList_Storefront_Translations();
-			$this->storefront_trans->trans_strings();
-
-			// Get Core Translations.
-			require_once CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-translations.php';
-			$this->trans = new WPBookList_Translations();
-			$this->trans->trans_strings();
-
 			$string1            = '';
 			$product_categories = '<option selected default disabled value="' . $this->storefront_trans->storefront_trans_23 . '">' . $this->storefront_trans->storefront_trans_23 . '</option>';
 			$string3            = '';
@@ -486,6 +493,70 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 
 			return $string_book_form . $header . $body_one . $body_two . $body_three . $closing;
 
+		}
+
+		/**
+		 *  Function to insert the Display Options on the 'Library View' Display Options Tab.
+		 */
+		public function wpbooklist_storefront_insert_library_view_display_options() {
+			return '<div class="wpbooklist-display-options-indiv-entry">
+						<div class="wpbooklist-display-options-label-div">
+							<img class="wpbooklist-icon-image-question-display-options wpbooklist-icon-image-question" data-label="library-display-form-finished" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
+							<label>' . $this->storefront_trans->storefront_trans_42 . '</label>
+						</div>
+						<div class="wpbooklist-margin-right-td">
+							<input type="checkbox" name="hide-library-display-form-finishedsort"></input>
+						</div>
+					</div>
+					<div class="wpbooklist-display-options-indiv-entry">
+						<div class="wpbooklist-display-options-label-div">
+							<img class="wpbooklist-icon-image-question-display-options wpbooklist-icon-image-question" data-label="library-display-form-finished" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
+							<label>' . $this->storefront_trans->storefront_trans_43 . '</label>
+						</div>
+						<div class="wpbooklist-margin-right-td">
+							<input type="checkbox" name="hide-library-display-form-finishedsort"></input>
+						</div>
+					</div>
+					<div class="wpbooklist-display-options-indiv-entry wpbooklist-display-options-indiv-entry-exception">
+		                <div id="wpbooklist-enable-purchase-div">' . $this->storefront_trans->storefront_trans_44 . '</div>
+		                <p id="wpbooklist-enable-purchase-p">' . $this->storefront_trans->storefront_trans_45 . '</p>
+		                <div id="wpbooklist-enable-purchase-actual-div"><label>' . $this->storefront_trans->storefront_trans_44 . '&nbsp;&nbsp;</label><input type="checkbox" name="enable-purchase-link"></div>
+		                <div id="wpbooklist-stylepak-demo-links">
+		                  <a href="http://wpbooklist.com/index.php/storefront-demo//">' . $this->storefront_trans->storefront_trans_46 . '</a>
+		                </div>
+            		</div>';
+		}
+
+		/**
+		 *  Function to insert the Display Options on the 'Book View' Display Options Tab.
+		 */
+		public function wpbooklist_storefront_insert_book_view_display_options() {
+			return '<div class="wpbooklist-display-options-indiv-entry">
+						<div class="wpbooklist-display-options-label-div">
+							<img class="wpbooklist-icon-image-question-display-options wpbooklist-icon-image-question" data-label="library-display-form-finished" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
+							<label>' . $this->storefront_trans->storefront_trans_42 . '</label>
+						</div>
+						<div class="wpbooklist-margin-right-td">
+							<input type="checkbox" name="hide-library-display-form-finishedsort"></input>
+						</div>
+					</div>
+					<div class="wpbooklist-display-options-indiv-entry">
+						<div class="wpbooklist-display-options-label-div">
+							<img class="wpbooklist-icon-image-question-display-options wpbooklist-icon-image-question" data-label="library-display-form-finished" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
+							<label>' . $this->storefront_trans->storefront_trans_43 . '</label>
+						</div>
+						<div class="wpbooklist-margin-right-td">
+							<input type="checkbox" name="hide-library-display-form-finishedsort"></input>
+						</div>
+					</div>
+					<div class="wpbooklist-display-options-indiv-entry wpbooklist-display-options-indiv-entry-exception">
+		                <div id="wpbooklist-enable-purchase-div">' . $this->storefront_trans->storefront_trans_44 . '</div>
+		                <p id="wpbooklist-enable-purchase-p">' . $this->storefront_trans->storefront_trans_45 . '</p>
+		                <div id="wpbooklist-enable-purchase-actual-div"><label>' . $this->storefront_trans->storefront_trans_44 . '&nbsp;&nbsp;</label><input type="checkbox" name="enable-purchase-link"></div>
+		                <div id="wpbooklist-stylepak-demo-links">
+		                  <a href="http://wpbooklist.com/index.php/storefront-demo//">' . $this->storefront_trans->storefront_trans_46 . '</a>
+		                </div>
+		            </div>';
 		}
 
 

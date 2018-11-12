@@ -70,7 +70,11 @@ if ( ! class_exists( 'WPBookList_StoreFront_Translations', false ) ) :
 			$this->storefront_trans_39 = __( 'Save StoreFront Settings', 'wpbooklist-textdomain' );
 			$this->storefront_trans_40 = __( 'You\'ve saved your StoreFront Settings!', 'wpbooklist-textdomain' );
 			$this->storefront_trans_41 = __( 'StoreFront WooCommerce Settings', 'wpbooklist-textdomain' );
-
+			$this->storefront_trans_42 = __( 'Hide Price', 'wpbooklist-textdomain' );
+			$this->storefront_trans_43 = __( 'Hide Purchase Image', 'wpbooklist-textdomain' );
+			$this->storefront_trans_44 = __( 'Enable the StoreFront Extension Links', 'wpbooklist-textdomain' );
+			$this->storefront_trans_45 = __( 'Checking this box will enable the StoreFront Extension Links, but only if you specified a price and an Author/Purchase link when adding your books.', 'wpbooklist-textdomain' );
+			$this->storefront_trans_46 = __( 'WPBookList-As-A-Storefront Demo', 'wpbooklist-textdomain' );
 
 
 			// The array of translation strings.
