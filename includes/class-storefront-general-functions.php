@@ -231,6 +231,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 		        calltoaction varchar(190) NOT NULL DEFAULT '$purchasetext',
 		        libraryimg varchar(255) NOT NULL DEFAULT '$purchasetext',
 		        bookimg varchar(255) NOT NULL DEFAULT '$purchasetext',
+		        defaultregularprice varchar(255),
 		        defaultsaleprice varchar(255),
 		        defaultsalebegin varchar(255),
 		        defaultsaleend varchar(255),

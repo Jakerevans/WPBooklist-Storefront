@@ -89,6 +89,7 @@ global $wpdb;
 	define( 'STOREFRONT_NONCES_ARRAY',
 		wp_json_encode(array(
 			'adminnonce1' => 'wpbooklist_storefront_settings_action_callback',
+			'adminnonce2' => 'wpbooklist_save_woocommerce_storefront_settings_action_callback',
 		))
 	);
 
@@ -160,6 +161,8 @@ global $wpdb;
 	add_action( 'wp_ajax_storefront_exit_results_action', array( $storefront_ajax_functions, 'storefront_exit_results_action_callback' ) );
 
 	add_action( 'wp_ajax_wpbooklist_storefront_settings_action', array( $storefront_ajax_functions, 'wpbooklist_storefront_settings_action_callback' ) );
+
+	add_action( 'wp_ajax_wpbooklist_save_woocommerce_storefront_settings_action', array( $storefront_ajax_functions, 'wpbooklist_save_woocommerce_storefront_settings_action_callback' ) );
 
 
 	
