@@ -243,31 +243,31 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 
 			// Creating the table.
 			$sql_create_table = "CREATE TABLE {$wpdb->wpbooklist_jre_storefront_options} 
-		    (
-		        ID bigint(190) auto_increment,
-		        calltoaction varchar(190) NOT NULL DEFAULT '$purchasetext',
-		        libraryimg varchar(255) NOT NULL DEFAULT '$purchasetext',
-		        bookimg varchar(255) NOT NULL DEFAULT '$purchasetext',
-		        defaultregularprice varchar(255),
-		        defaultsaleprice varchar(255),
-		        defaultsalebegin varchar(255),
-		        defaultsaleend varchar(255),
-		        defaultwidth varchar(255),
-		        defaultheight varchar(255),
-		        defaultweight varchar(255),
-		        defaultlength varchar(255),
-		        defaultstock varchar(255),
-		        defaultsku varchar(255),
-		        defaultnote varchar(255),
-		        defaultupsell varchar(255),
-		        defaultcrosssell varchar(255),
-		        defaultcategory varchar(255),
-		        defaultvirtual varchar(255),
-		        defaultdownload varchar(255),
-		        defaultreviews varchar(255),
-		        PRIMARY KEY  (ID),
-		          KEY title (calltoaction)
-		    ) $charset_collate; ";
+			(
+				ID bigint(190) auto_increment,
+				calltoaction varchar(190) NOT NULL DEFAULT '$purchasetext',
+				libraryimg varchar(255) NOT NULL DEFAULT '$purchasetext',
+				bookimg varchar(255) NOT NULL DEFAULT '$purchasetext',
+				defaultregularprice varchar(255),
+				defaultsaleprice varchar(255),
+				defaultsalebegin varchar(255),
+				defaultsaleend varchar(255),
+				defaultwidth varchar(255),
+				defaultheight varchar(255),
+				defaultweight varchar(255),
+				defaultlength varchar(255),
+				defaultstock varchar(255),
+				defaultsku varchar(255),
+				defaultnote varchar(255),
+				defaultupsell varchar(255),
+				defaultcrosssell varchar(255),
+				defaultcategory varchar(255),
+				defaultvirtual varchar(255),
+				defaultdownload varchar(255),
+				defaultreviews varchar(255),
+				PRIMARY KEY  (ID),
+				  KEY title (calltoaction)
+			) $charset_collate; ";
 			dbDelta( $sql_create_table );
 
 			$table_name = $wpdb->prefix . 'wpbooklist_jre_storefront_options';
@@ -375,9 +375,9 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 				<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-customfields">
 					<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
 					<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_4 . '</label>
-					<input name="book-sale-author-link" type="text" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
+					<input name="book-sale-author-link" id="wpbooklist-addbook-url" type="text" data-customfield-type="plaintextentry" class="wpbooklist-addbook-customfield-plain-text-entry">
 				</div>
-				<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-exception">
+				<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-exception" id="wpbooklist-storefront-create-product-row">
 					<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="http://localhost/local/wp-content/plugins/wpbooklist/assets/img/icons/question-black.svg">
 					<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->storefront_trans_5 . '?</label>
 					<select class="wpbooklist-addbook-select-default" id="wpbooklist-addbook-storefront-select-woocommerce">
@@ -443,15 +443,15 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 							<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
 							<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_16 . '</label>
 							<select class="storefront-select2-upsells select2-storefront-container wpbooklist-addbook-select-default" name="upsellproducts[]" data-customfield-type="plaintextentry" multiple="multiple">
-		                        ' . $sells . '
-		                    </select>
+									' . $sells . '
+							</select>
 						</div>
 						<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-storefront-up-cross">
 							<img class="wpbooklist-icon-image-question" data-label="book-form-customfield-plaintext" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
 							<label class="wpbooklist-question-icon-label">' . $this->storefront_trans->storefront_trans_17 . '</label>
 							<select class="storefront-select2-crosssells select2-storefront-container wpbooklist-addbook-select-default" name="upsellproducts[]" data-customfield-type="plaintextentry" multiple="multiple">
-		                        ' . $sells . '
-		                    </select>
+									' . $sells . '
+							</select>
 	                    </div>
 					</div>';
 
@@ -505,7 +505,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 							<label>' . $this->storefront_trans->storefront_trans_42 . '</label>
 						</div>
 						<div class="wpbooklist-margin-right-td">
-							<input type="checkbox" name="hide-library-display-form-finishedsort"></input>
+							<input type="checkbox" name="hide-library-display-form-hidefrontendbuyprice"></input>
 						</div>
 					</div>
 					<div class="wpbooklist-display-options-indiv-entry">
@@ -514,16 +514,16 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 							<label>' . $this->storefront_trans->storefront_trans_43 . '</label>
 						</div>
 						<div class="wpbooklist-margin-right-td">
-							<input type="checkbox" name="hide-library-display-form-finishedsort"></input>
+							<input type="checkbox" name="hide-library-display-form-hidefrontendbuyimg"></input>
 						</div>
 					</div>
 					<div class="wpbooklist-display-options-indiv-entry wpbooklist-display-options-indiv-entry-exception">
-		                <div id="wpbooklist-enable-purchase-div">' . $this->storefront_trans->storefront_trans_44 . '</div>
-		                <p id="wpbooklist-enable-purchase-p">' . $this->storefront_trans->storefront_trans_45 . '</p>
-		                <div id="wpbooklist-enable-purchase-actual-div"><label>' . $this->storefront_trans->storefront_trans_44 . '&nbsp;&nbsp;</label><input type="checkbox" name="enable-purchase-link"></div>
-		                <div id="wpbooklist-stylepak-demo-links">
-		                  <a href="http://wpbooklist.com/index.php/storefront-demo//">' . $this->storefront_trans->storefront_trans_46 . '</a>
-		                </div>
+						<div id="wpbooklist-enable-purchase-div">' . $this->storefront_trans->storefront_trans_44 . '</div>
+						<p id="wpbooklist-enable-purchase-p">' . $this->storefront_trans->storefront_trans_45 . '</p>
+						<div id="wpbooklist-enable-purchase-actual-div"><label>' . $this->storefront_trans->storefront_trans_44 . '&nbsp;&nbsp;</label><input type="checkbox" name="enable-purchase-link"></div>
+						<div id="wpbooklist-stylepak-demo-links">
+						  <a href="http://wpbooklist.com/index.php/storefront-demo//">' . $this->storefront_trans->storefront_trans_46 . '</a>
+						</div>
             		</div>';
 		}
 
@@ -537,7 +537,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 							<label>' . $this->storefront_trans->storefront_trans_42 . '</label>
 						</div>
 						<div class="wpbooklist-margin-right-td">
-							<input type="checkbox" name="hide-library-display-form-finishedsort"></input>
+							<input type="checkbox" name="hide-library-display-form-hidecolorboxbuyprice"></input>
 						</div>
 					</div>
 					<div class="wpbooklist-display-options-indiv-entry">
@@ -546,17 +546,110 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 							<label>' . $this->storefront_trans->storefront_trans_43 . '</label>
 						</div>
 						<div class="wpbooklist-margin-right-td">
-							<input type="checkbox" name="hide-library-display-form-finishedsort"></input>
+							<input type="checkbox" name="hide-library-display-form-hidecolorboxbuyimg"></input>
 						</div>
 					</div>
 					<div class="wpbooklist-display-options-indiv-entry wpbooklist-display-options-indiv-entry-exception">
-		                <div id="wpbooklist-enable-purchase-div">' . $this->storefront_trans->storefront_trans_44 . '</div>
-		                <p id="wpbooklist-enable-purchase-p">' . $this->storefront_trans->storefront_trans_45 . '</p>
-		                <div id="wpbooklist-enable-purchase-actual-div"><label>' . $this->storefront_trans->storefront_trans_44 . '&nbsp;&nbsp;</label><input type="checkbox" name="enable-purchase-link"></div>
-		                <div id="wpbooklist-stylepak-demo-links">
-		                  <a href="http://wpbooklist.com/index.php/storefront-demo//">' . $this->storefront_trans->storefront_trans_46 . '</a>
-		                </div>
-		            </div>';
+						<div id="wpbooklist-enable-purchase-div">' . $this->storefront_trans->storefront_trans_44 . '</div>
+						<p id="wpbooklist-enable-purchase-p">' . $this->storefront_trans->storefront_trans_45 . '</p>
+						<div id="wpbooklist-enable-purchase-actual-div"><label>' . $this->storefront_trans->storefront_trans_44 . '&nbsp;&nbsp;</label><input type="checkbox" name="enable-purchase-link"></div>
+						<div id="wpbooklist-stylepak-demo-links">
+						  <a href="http://wpbooklist.com/index.php/storefront-demo//">' . $this->storefront_trans->storefront_trans_46 . '</a>
+						</div>
+					</div>';
+		}
+
+		/** Function to display the Price/Buy Img/Link on front-end Library view.
+		 *
+		 *  @param string $string - The string that contains price, url, img, etc.
+		 */
+		public function wpbooklist_append_to_frontend_library_price_purchase_func( $string ) {
+
+			if ( null !== $string[0] ) {
+				if ( strpos( $string[0], 'http://' ) === false && strpos( $string[0], 'https://' ) === false ) {
+					$string[0] = 'http://' . $string[0];
+				} else {
+					$string[0] = $string[0];
+				}
+			}
+
+			$string1 = '<div class="wpbooklist-frontend-library-price">
+									<a href="' . $string[0] . '">' . $string[1] . '</a>
+						</div>';
+
+			return $string1;
+		}
+
+
+
+
+		/** Function to display the Price/Buy Img/Link on front-end Library view.
+		 *
+		 *  @param string $string - The string that contains price, url, img, etc.
+		 */
+		public function wpbooklist_append_to_frontend_library_image_purchase_func( $string ) {
+
+			// Get saved purcahse image.
+			global $wpdb;
+			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+
+			if ( null !== $string[0] ) {
+
+				if ( false === strpos( $string[0], 'http://' ) && false === strpos( $string[0], 'https://' ) ) {
+					$string[0] = 'http://' . $string[0];
+				} else {
+					$string[0] = $string[0];
+				}
+			}
+
+			if ( ( false !== strpos( $row->libraryimg, 'http://' ) || false !== strpos( $row->libraryimg, 'https://' ) ) && false === strpos( $row->libraryimg, 'book-placeholder.png' ) ) {
+				$string1 = '<div class="wpbooklist-frontend-library-buy-img">
+								<a class="wpbooklist-library-purchase-link-styled" href="' . $string[0] . '"><img src="' . $row->libraryimg . '"/></a>
+						</div>';
+			} else {
+				$string1 = '<div class="wpbooklist-frontend-library-buy-img">
+								<a class="wpbooklist-library-purchase-link-styled" href="' . $string[0] . '">' . $row->calltoaction . '</a>
+						</div>';
+			}
+
+			return $string1;
+		}
+
+		/**
+		 *  Function to add purchase images to the media library upon activation.
+		 */
+		public function wpbooklist_jre_storefront_add_purchase_images() {
+			global $wpdb;
+
+			$file = array(
+				STOREFRONT_ROOT_IMG_DIR . 'wpbooklist_purchase_img_1.png',
+				STOREFRONT_ROOT_IMG_DIR . 'wpbooklist_purchase_img_2.png',
+				STOREFRONT_ROOT_IMG_DIR . 'wpbooklist_purchase_img_3.png',
+				STOREFRONT_ROOT_IMG_DIR . 'wpbooklist_purchase_img_4.png',
+			);
+
+			foreach ( $file as $f ) {
+				$max_id      = $wpdb->get_var( "SELECT MAX(id) FROM $wpdb->posts" );
+				$post_id     = $max_id + 1;
+				$filename    = basename( $f );
+				$upload_file = wp_upload_bits( $filename, null, file_get_contents( $f ) );
+				if ( ! $upload_file['error'] ) {
+
+					$wp_filetype   = wp_check_filetype( $filename, null );
+					$attachment    = array(
+						'post_mime_type' => 'image/png',
+						'post_title'     => preg_replace( '/\.[^.]+$/', '', $filename ),
+						'post_content'   => 'my description',
+						'post_status'    => 'inherit',
+					);
+					$attachment_id = wp_insert_attachment( $attachment, $upload_file['file'], $post_id );
+					if ( ! is_wp_error( $attachment_id ) ) {
+						require_once ABSPATH . 'wp-admin/includes/image.php';
+						$attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload_file['file'] );
+						wp_update_attachment_metadata( $attachment_id, $attachment_data );
+					}
+				}
+			}
 		}
 
 

@@ -46,6 +46,9 @@ global $wpdb;
 	// Root Classes Directory.
 	define( 'STOREFRONT_CLASS_DIR', STOREFRONT_ROOT_DIR . 'includes/classes/' );
 
+	// Root Image Icons DIR of this extension.
+	define('STOREFRONT_ROOT_IMG_DIR', STOREFRONT_ROOT_DIR . 'assets/img/');
+
 	// Root REST Classes Directory.
 	define( 'STOREFRONT_CLASS_REST_DIR', STOREFRONT_ROOT_DIR . 'includes/classes/rest/' );
 
@@ -153,8 +156,15 @@ global $wpdb;
 	// Runs once upon extension activation and adds it's version number to the 'extensionversions' column in the 'wpbooklist_jre_user_options' table of the core plugin.
 	register_activation_hook( __FILE__, array( $storefront_general_functions, 'wpbooklist_storefront_record_extension_version' ) );
 
+	// Function to add purchase images to the media library upon activation.
+	register_activation_hook( __FILE__, array( $storefront_general_functions, 'wpbooklist_jre_storefront_add_purchase_images' ) );
+
 	// Function that adds in the HTML into the 'Add a Book' form.
 	add_filter( 'wpbooklist_append_to_book_form_storefront_fields', array( $storefront_general_functions, 'wpbooklist_storefront_insert_storefront_fields' ) );
+
+	add_filter( 'wpbooklist_append_to_frontend_library_price_purchase', array( $storefront_general_functions, 'wpbooklist_append_to_frontend_library_price_purchase_func' ) );
+
+	add_filter( 'wpbooklist_append_to_frontend_library_image_purchase', array( $storefront_general_functions, 'wpbooklist_append_to_frontend_library_image_purchase_func' ) );
 
 
 /* END OF FUNCTIONS FOUND IN CLASS-WPBOOKLIST-GENERAL-FUNCTIONS.PHP THAT APPLY PLUGIN-WIDE */

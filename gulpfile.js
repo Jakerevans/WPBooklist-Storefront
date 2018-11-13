@@ -60,7 +60,7 @@ gulp.task( 'sassBackendSource', function() {
 // Task to concatenate and uglify js files
 gulp.task( 'concatAdminJs', function() {
 	gulp.src(jsBackendSource ) // use jsSources
-		.pipe(concat( 'wpbooklist-storefront_admin.min.js' ) ) // Concat to a file named 'script.js'
+		.pipe(concat( 'wpbooklist_storefront_admin.min.js' ) ) // Concat to a file named 'script.js'
 		.pipe(uglify() ) // Uglify concatenated file
 		.pipe(gulp.dest( 'assets/js' ) ); // The destination for the concatenated and uglified file
 });
