@@ -652,6 +652,62 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 			}
 		}
 
+		/** Function to display the colorbox price.
+		 *
+		 *  @param string $string - The string that contains price.
+		 */
+		public function wpbooklist_append_to_colorbox_price_func( $string ) {
+
+			$string1 = '<tr>
+			                <td>
+			                    <span class="wpbooklist-bold-stats-class" id="wpbooklist_bold">Price:</span><span class="wpbooklist-bold-stats-value">' . $string . '</span>
+			                </td>   
+			            </tr>';
+
+			return $string1;
+		}
+
+		/** Function to display the colorbox price.
+		 *
+		 *  @param string $string - The string that contains text link.
+		 */
+		public function wpbooklist_append_to_colorbox_purchase_text_link_func( $string ) {
+
+			// Get saved purcahse image.
+			global $wpdb;
+			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options');
+
+			$string1 = ' id="wpbooklist-purchase-book-view" href="' . $string . '">' . $row->calltoaction . '</a';
+
+			return $string1;
+		}
+
+		/** Function to display the colorbox image link
+		 *
+		 *  @param string $string - The string that contains the colorbox image link.
+		 */
+		public function wpbooklist_append_to_colorbox_purchase_image_link_func( $string ) {
+
+			// Get saved purchase image.
+			global $wpdb;
+			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+
+			if ( ( false !== strpos( $row->bookimg, 'http://' ) || false !== strpos( $row->bookimg, 'https://' ) ) && false === strpos( $row->bookimg, 'book-placeholder.png' ) ) {
+
+				$string1 = '<a class="wpbooklist-purchase-img" href="' . $string . '" target="_blank">
+			            <img src="' . $row->bookimg . '" id="wpbooklist-author-img">
+			        </a>';
+
+			} else {
+
+				$string1 = '<a class="wpbooklist-purchase-img" href="' . $string . '" target="_blank">
+			            <img src="' . STOREFRONT_ROOT_IMG_URL . 'author-icon.png" id="wpbooklist-author-img">
+			        </a>';
+			}
+
+			return $string1;
+		}
+
 
 	}
 endif;

@@ -166,6 +166,13 @@ global $wpdb;
 
 	add_filter( 'wpbooklist_append_to_frontend_library_image_purchase', array( $storefront_general_functions, 'wpbooklist_append_to_frontend_library_image_purchase_func' ) );
 
+	add_filter( 'wpbooklist_append_to_colorbox_price', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_price_func' ) );
+
+	add_filter( 'wpbooklist_append_to_colorbox_purchase_text_link', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_purchase_text_link_func' ) );
+
+	add_filter( 'wpbooklist_append_to_colorbox_purchase_image_link', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_purchase_image_link_func' ) );
+
+
 
 /* END OF FUNCTIONS FOUND IN CLASS-WPBOOKLIST-GENERAL-FUNCTIONS.PHP THAT APPLY PLUGIN-WIDE */
 
