@@ -28,11 +28,6 @@ if ( ! class_exists( 'WPBookList_Storefront_WooCommerce_Form', false ) ) :
 			$this->storefront_trans = new WPBookList_Storefront_Translations();
 			$this->storefront_trans->trans_strings();
 
-			// Get Core Translations.
-			require_once CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-translations.php';
-			$this->trans = new WPBookList_Translations();
-			$this->trans->trans_strings();
-
 		}
 
 
@@ -144,22 +139,21 @@ if ( ! class_exists( 'WPBookList_Storefront_WooCommerce_Form', false ) ) :
 			}
 
 			if ( 'Yes' === $settings->defaultvirtual ) {
-				$virtual_options = '<option selected>' . $this->trans->trans_131 . '</option>
-								<option>' . $this->trans->trans_132 . '</option>';
+				$virtual_options = '<option selected>' . $this->storefront_trans->storefront_trans_47 . '</option>
+								<option>' . $this->storefront_trans->storefront_trans_48 . '</option>';
 			} else {
-				$virtual_options = '<option>' . $this->trans->trans_131 . '</option>
-								<option selected>' . $this->trans->trans_132 . '</option>';
+				$virtual_options = '<option>' . $this->storefront_trans->storefront_trans_47 . '</option>
+								<option selected>' . $this->storefront_trans->storefront_trans_48 . '</option>';
 			}
 
 			if ( 'Yes' === $settings->defaultreviews ) {
-				$reviews_options = '<option selected>' . $this->trans->trans_131 . '</option>
-								<option>' . $this->trans->trans_132 . '</option>';
+				$reviews_options = '<option selected>' . $this->storefront_trans->storefront_trans_47 . '</option>
+								<option>' . $this->storefront_trans->storefront_trans_48 . '</option>';
 			} else {
-				$reviews_options = '<option>' . $this->trans->trans_131 . '</option>
-								<option selected>' . $this->trans->trans_132 . '</option>';
+				$reviews_options = '<option>' . $this->storefront_trans->storefront_trans_47 . '</option>
+								<option selected>' . $this->storefront_trans->storefront_trans_48 . '</option>';
 			}
 
-		
 			$product_categories = '<option selected default disabled value="' . $this->storefront_trans->storefront_trans_23 . '">' . $this->storefront_trans->storefront_trans_23 . '</option>';
 
 			// Build the WooCommerce Product Categories Drop-Down string.
@@ -242,21 +236,21 @@ if ( ! class_exists( 'WPBookList_Storefront_WooCommerce_Form', false ) ) :
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container wpbooklist-book-form-indiv-attribute-container-exception">
 						<div class="wpbooklist-book-form-indiv-attribute-container">
-							<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="http://localhost/local/wp-content/plugins/wpbooklist/assets/img/icons/question-black.svg">
+							<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
 							<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->storefront_trans_19 . ':</label>
 							<select id="wpbooklist-woocommerce-category-select" class="wpbooklist-addbook-select-default">
 								' . $product_categories . '
 							</select>
 						</div>
 						<div class="wpbooklist-book-form-indiv-attribute-container">
-							<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="http://localhost/local/wp-content/plugins/wpbooklist/assets/img/icons/question-black.svg">
+							<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
 							<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->storefront_trans_20 . '?</label>
 							<select class="wpbooklist-addbook-select-default" id="wpbooklist-woocommerce-virtual-select">
 								' . $virtual_options . '
 							</select>
 						</div>
 						<div class="wpbooklist-book-form-indiv-attribute-container">
-							<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="http://localhost/local/wp-content/plugins/wpbooklist/assets/img/icons/question-black.svg">
+							<img class="wpbooklist-icon-image-question" data-label="book-form-rating" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
 							<label class="wpbooklist-question-icon-label" for="book-rating">' . $this->storefront_trans->storefront_trans_21 . '?</label>
 							<select class="wpbooklist-addbook-select-default" id="wpbooklist-woocommerce-enable-reviews-select">
 								' . $reviews_options . '
@@ -264,7 +258,7 @@ if ( ! class_exists( 'WPBookList_Storefront_WooCommerce_Form', false ) ) :
 						</div>
 					</div>
 					<div class="wpbooklist-book-form-indiv-attribute-container">
-						<img class="wpbooklist-icon-image-question" data-label="book-form-shortdescription" src="http://localhost/local/wp-content/plugins/wpbooklist/assets/img/icons/question-black.svg">
+						<img class="wpbooklist-icon-image-question" data-label="book-form-shortdescription" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
 						<label class="wpbooklist-question-icon-label" for="book-shortdescription">' . $this->storefront_trans->storefront_trans_18 . '</label>
 						<textarea name="book-woo-note" id="wpbooklist-addbook-storefront-purchasenote" name="book-shortdescription">' . $settings->defaultnote . '</textarea>
 					</div>

@@ -75,6 +75,8 @@ if ( ! class_exists( 'WPBookList_StoreFront_Translations', false ) ) :
 			$this->storefront_trans_44 = __( 'Enable the StoreFront Extension Links', 'wpbooklist-textdomain' );
 			$this->storefront_trans_45 = __( 'Checking this box will enable the StoreFront Extension Links, but only if you specified a price and an Author/Purchase link when adding your books.', 'wpbooklist-textdomain' );
 			$this->storefront_trans_46 = __( 'WPBookList-As-A-Storefront Demo', 'wpbooklist-textdomain' );
+			$this->storefront_trans_47 = __( 'Yes', 'wpbooklist' );
+			$this->storefront_trans_48 = __( 'No', 'wpbooklist' );
 
 
 			// The array of translation strings.
@@ -119,6 +121,14 @@ if ( ! class_exists( 'WPBookList_StoreFront_Translations', false ) ) :
 				'storefronttrans38' => $this->storefront_trans_38,
 				'storefronttrans39' => $this->storefront_trans_39,
 				'storefronttrans40' => $this->storefront_trans_40,
+				'storefronttrans41' => $this->storefront_trans_41,
+				'storefronttrans42' => $this->storefront_trans_42,
+				'storefronttrans43' => $this->storefront_trans_43,
+				'storefronttrans44' => $this->storefront_trans_44,
+				'storefronttrans45' => $this->storefront_trans_45,
+				'storefronttrans46' => $this->storefront_trans_46,
+				'storefronttrans47' => $this->storefront_trans_47,
+				'storefronttrans48' => $this->storefront_trans_48,
 			);
 
 			return $translation_array;
