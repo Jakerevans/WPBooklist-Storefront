@@ -643,11 +643,21 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 		 */
 		public function wpbooklist_append_to_colorbox_price_func( $string ) {
 
-			$string1 = '<tr>
+			$string = explode( '---', $string );
+
+			if ( '' !== $string[1] && null !== $string[1] ) {
+				$string1 = '<tr>
 			                <td>
-			                    <span class="wpbooklist-bold-stats-class" id="wpbooklist_bold">Price:</span><span class="wpbooklist-bold-stats-value">' . $string . '</span>
+			                    <span class="wpbooklist-bold-stats-class" id="wpbooklist_bold">' . $this->storefront_trans->storefront_trans_49 . ': </span><a href="' . $string[1] . '"><span class="wpbooklist-bold-stats-value">' . $string[0] . '</span></a>
 			                </td>   
 			            </tr>';
+			} else {
+				$string1 = '<tr>
+			                <td>
+			                    <span class="wpbooklist-bold-stats-class" id="wpbooklist_bold">' . $this->storefront_trans->storefront_trans_49 . ': </span><span class="wpbooklist-bold-stats-value">' . $string[0] . '</span>
+			                </td>   
+			            </tr>';
+			}
 
 			return $string1;
 		}

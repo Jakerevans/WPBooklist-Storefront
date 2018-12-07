@@ -77,6 +77,7 @@ if ( ! class_exists( 'WPBookList_StoreFront_Translations', false ) ) :
 			$this->storefront_trans_46 = __( 'WPBookList-As-A-Storefront Demo', 'wpbooklist-textdomain' );
 			$this->storefront_trans_47 = __( 'Yes', 'wpbooklist' );
 			$this->storefront_trans_48 = __( 'No', 'wpbooklist' );
+			$this->storefront_trans_49 = __( 'Price', 'wpbooklist' );
 
 
 			// The array of translation strings.
@@ -129,6 +130,7 @@ if ( ! class_exists( 'WPBookList_StoreFront_Translations', false ) ) :
 				'storefronttrans46' => $this->storefront_trans_46,
 				'storefronttrans47' => $this->storefront_trans_47,
 				'storefronttrans48' => $this->storefront_trans_48,
+				'storefronttrans49' => $this->storefront_trans_49,
 			);
 
 			return $translation_array;
