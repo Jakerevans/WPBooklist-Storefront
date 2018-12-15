@@ -22,6 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
+
 global $wpdb;
 
 /* REQUIRE STATEMENTS */
@@ -78,6 +80,41 @@ global $wpdb;
 
 	// Root UI Admin directory.
 	define( 'STOREFRONT_ROOT_INCLUDES_UI_ADMIN_DIR', STOREFRONT_ROOT_DIR . 'includes/ui/admin/' );
+
+	// Root WPBL Dir.
+	if ( ! defined('ROOT_WPBL_DIR' ) ) {
+		define( 'ROOT_WPBL_DIR', STOREFRONT_ROOT_WP_PLUGINS_DIR . 'wpbooklist/' );
+	}
+
+	// Root WPBL Url.
+	if ( ! defined('ROOT_WPBL_URL' ) ) {
+		define( 'ROOT_WPBL_URL', plugins_url() . '/wpbooklist/' );
+	}
+
+	// Root WPBL Classes Dir.
+	if ( ! defined('ROOT_WPBL_CLASSES_DIR' ) ) {
+		define( 'ROOT_WPBL_CLASSES_DIR', ROOT_WPBL_DIR . 'includes/classes/' );
+	}
+
+	// Root WPBL Transients Dir.
+	if ( ! defined('ROOT_WPBL_TRANSIENTS_DIR' ) ) {
+		define( 'ROOT_WPBL_TRANSIENTS_DIR', ROOT_WPBL_CLASSES_DIR . 'transients/' );
+	}
+
+	// Root WPBL Translations Dir.
+	if ( ! defined('ROOT_WPBL_TRANSLATIONS_DIR' ) ) {
+		define( 'ROOT_WPBL_TRANSLATIONS_DIR', ROOT_WPBL_CLASSES_DIR . 'translations/' );
+	}
+
+	// Root WPBL Root Img Icons Dir.
+	if ( ! defined('ROOT_WPBL_IMG_ICONS_URL' ) ) {
+		define( 'ROOT_WPBL_IMG_ICONS_URL', ROOT_WPBL_URL . 'assets/img/icons/' );
+	}
+
+	// Root WPBL Root Img Icons Dir.
+	if ( ! defined('ROOT_WPBL_UTILITIES_DIR' ) ) {
+		define( 'ROOT_WPBL_UTILITIES_DIR', ROOT_WPBL_CLASSES_DIR . 'utilities/' );
+	}
 
 	// Define the Uploads base directory.
 	$uploads     = wp_upload_dir();

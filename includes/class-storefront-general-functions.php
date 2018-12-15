@@ -120,17 +120,25 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 			require_once STOREFRONT_CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-storefront-translations.php';
 			$trans = new WPBookList_StoreFront_Translations();
 
+			// Next 4-5 lines are required to allow translations of strings that would otherwise live in the wpbooklist-admin-js.js JavaScript File.
+			require_once ROOT_WPBL_TRANSLATIONS_DIR . 'class-wpbooklist-translations.php';
+			$core_trans = new WPBookList_Translations();
+
 			// Localize the script with the appropriate translation array from this Extension's Translations class.
 			$translation_array1 = $trans->trans_strings();
+			// Localize the script with the appropriate translation array from this Extension's Translations class.
+			$translation_array2 = $core_trans->trans_strings();
 
 			// Now grab all of our Nonces to pass to the JavaScript for the Ajax functions and merge with the Translations array.
 			$final_array_of_php_values = array_merge( $translation_array1, json_decode( STOREFRONT_FINAL_NONCES_ARRAY, true ) );
+			$final_array_of_php_values = array_merge( $final_array_of_php_values, $translation_array2 );
 
 			// Adding some other individual values we may need.
+			$final_array_of_php_values['ROOT_WPBL_IMG_ICONS_URL']       = ROOT_WPBL_IMG_ICONS_URL;
 			$final_array_of_php_values['STOREFRONT_ROOT_IMG_ICONS_URL'] = STOREFRONT_ROOT_IMG_ICONS_URL;
 			$final_array_of_php_values['STOREFRONT_ROOT_IMG_URL']       = STOREFRONT_ROOT_IMG_URL;
-			$final_array_of_php_values['FOR_TAB_HIGHLIGHT']                         = admin_url() . 'admin.php';
-			$final_array_of_php_values['SAVED_ATTACHEMENT_ID']                      = get_option( 'media_selector_attachment_id', 0 );
+			$final_array_of_php_values['FOR_TAB_HIGHLIGHT']             = admin_url() . 'admin.php';
+			$final_array_of_php_values['SAVED_ATTACHEMENT_ID']          = get_option( 'media_selector_attachment_id', 0 );
 
 			// Now registering/localizing our JavaScript file, passing all the PHP variables we'll need in our $final_array_of_php_values array, to be accessed from 'wphealthtracker_php_variables' object (like wphealthtracker_php_variables.nameofkey, like any other JavaScript object).
 			wp_localize_script( 'wpbooklist_storefront_adminjs', 'wpbooklistStoreFrontPhpVariables', $final_array_of_php_values );
