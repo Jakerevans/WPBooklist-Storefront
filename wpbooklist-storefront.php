@@ -163,6 +163,10 @@ global $wpdb;
 
 	add_filter( 'wpbooklist_add_to_book_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_book_view_display_options' ) );
 
+	add_filter( 'wpbooklist_add_to_posts_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_posts_display_options' ) );
+
+	add_filter( 'wpbooklist_add_to_pages_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_pages_display_options' ) );
+
 	// Adding the function that will take our STOREFRONT_NONCES_ARRAY Constant from above and create actual nonces to be passed to Javascript functions.
 	add_action( 'init', array( $storefront_general_functions, 'wpbooklist_storefront_create_nonces' ) );
 
@@ -208,6 +212,14 @@ global $wpdb;
 	add_filter( 'wpbooklist_append_to_colorbox_purchase_text_link', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_purchase_text_link_func' ) );
 
 	add_filter( 'wpbooklist_append_to_colorbox_purchase_image_link', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_purchase_image_link_func' ) );
+
+	add_filter( 'wpbooklist_add_storefront_calltoaction_page', array( $storefront_general_functions, 'wpbooklist_add_storefront_calltoaction_page_func' ) );
+
+	add_filter( 'wpbooklist_add_storefront_bookimg_page', array( $storefront_general_functions, 'wpbooklist_add_storefront_bookimg_page_func' ) );
+
+	add_filter( 'wpbooklist_add_storefront_calltoaction_post', array( $storefront_general_functions, 'wpbooklist_add_storefront_calltoaction_post_func' ) );
+
+	add_filter( 'wpbooklist_add_storefront_bookimg_post', array( $storefront_general_functions, 'wpbooklist_add_storefront_bookimg_post_func' ) );
 
 
 

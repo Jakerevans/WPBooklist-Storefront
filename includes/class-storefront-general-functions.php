@@ -552,6 +552,70 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 					</div>';
 		}
 
+		/**
+		 *  Function to insert the Display Options on the 'Posts' Display Options Tab.
+		 */
+		public function wpbooklist_storefront_insert_posts_display_options() {
+			return '<div class="wpbooklist-display-options-indiv-entry">
+						<div class="wpbooklist-display-options-label-div">
+							<img class="wpbooklist-icon-image-question-display-options wpbooklist-icon-image-question" data-label="library-display-form-finished" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
+							<label>' . $this->storefront_trans->storefront_trans_42 . '</label>
+						</div>
+						<div class="wpbooklist-margin-right-td">
+							<input type="checkbox" name="hide-library-display-form-hidefrontendbuyprice"></input>
+						</div>
+					</div>
+					<div class="wpbooklist-display-options-indiv-entry">
+						<div class="wpbooklist-display-options-label-div">
+							<img class="wpbooklist-icon-image-question-display-options wpbooklist-icon-image-question" data-label="library-display-form-finished" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
+							<label>' . $this->storefront_trans->storefront_trans_43 . '</label>
+						</div>
+						<div class="wpbooklist-margin-right-td">
+							<input type="checkbox" name="hide-library-display-form-hidefrontendbuyimg"></input>
+						</div>
+					</div>
+					<div class="wpbooklist-display-options-indiv-entry wpbooklist-display-options-indiv-entry-exception">
+						<div id="wpbooklist-enable-purchase-div">' . $this->storefront_trans->storefront_trans_44 . '</div>
+						<p id="wpbooklist-enable-purchase-p">' . $this->storefront_trans->storefront_trans_45 . '</p>
+						<div id="wpbooklist-enable-purchase-actual-div"><label>' . $this->storefront_trans->storefront_trans_44 . '&nbsp;&nbsp;</label><input type="checkbox" name="enable-purchase-link"></div>
+						<div id="wpbooklist-stylepak-demo-links">
+						  <a href="http://wpbooklist.com/index.php/storefront-demo//">' . $this->storefront_trans->storefront_trans_46 . '</a>
+						</div>
+            		</div>';
+		}
+
+		/**
+		 *  Function to insert the Display Options on the 'pages' Display Options Tab.
+		 */
+		public function wpbooklist_storefront_insert_pages_display_options() {
+			return '<div class="wpbooklist-display-options-indiv-entry">
+						<div class="wpbooklist-display-options-label-div">
+							<img class="wpbooklist-icon-image-question-display-options wpbooklist-icon-image-question" data-label="library-display-form-finished" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
+							<label>' . $this->storefront_trans->storefront_trans_42 . '</label>
+						</div>
+						<div class="wpbooklist-margin-right-td">
+							<input type="checkbox" name="hide-library-display-form-hidefrontendbuyprice"></input>
+						</div>
+					</div>
+					<div class="wpbooklist-display-options-indiv-entry">
+						<div class="wpbooklist-display-options-label-div">
+							<img class="wpbooklist-icon-image-question-display-options wpbooklist-icon-image-question" data-label="library-display-form-finished" src="' . ROOT_IMG_ICONS_URL . 'question-black.svg">
+							<label>' . $this->storefront_trans->storefront_trans_43 . '</label>
+						</div>
+						<div class="wpbooklist-margin-right-td">
+							<input type="checkbox" name="hide-library-display-form-hidefrontendbuyimg"></input>
+						</div>
+					</div>
+					<div class="wpbooklist-display-options-indiv-entry wpbooklist-display-options-indiv-entry-exception">
+						<div id="wpbooklist-enable-purchase-div">' . $this->storefront_trans->storefront_trans_44 . '</div>
+						<p id="wpbooklist-enable-purchase-p">' . $this->storefront_trans->storefront_trans_45 . '</p>
+						<div id="wpbooklist-enable-purchase-actual-div"><label>' . $this->storefront_trans->storefront_trans_44 . '&nbsp;&nbsp;</label><input type="checkbox" name="enable-purchase-link"></div>
+						<div id="wpbooklist-stylepak-demo-links">
+						  <a href="http://wpbooklist.com/index.php/storefront-demo//">' . $this->storefront_trans->storefront_trans_46 . '</a>
+						</div>
+            		</div>';
+		}
+
 		/** Function to display the Price/Buy Img/Link on front-end Library view.
 		 *
 		 *  @param string $string - The string that contains price, url, img, etc.
@@ -711,6 +775,88 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 			return $string1;
 		}
 
+		/** Function to display the price link on a page.
+		 *
+		 *  @param string $string - The string that contains the price.
+		 */
+		public function wpbooklist_add_storefront_calltoaction_page_func( $string ) {
 
+			global $wpdb;
+			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+
+			if ( false === stripos( $string, 'http://' ) && false === stripos( $string, 'https://' ) ) {
+				$string = 'http://' . $string;
+			} else {
+				$string = $string;
+			}
+
+			$string1 = '<div id="wpbl-pagetd-book-details-5">
+			<a id="wpbl-pagetd-purchase-now-link" href="' . $string . '">' . $row->calltoaction . '</a>
+			</div>';
+
+			return $string1;
+		}
+
+		/** Function to display the image link on a page.
+		 *
+		 *  @param string $string - The string that contains the price.
+		 */
+		public function wpbooklist_add_storefront_bookimg_page_func( $string ) {
+
+			global $wpdb;
+			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+
+			if ( false === stripos( $string, 'http://' ) && false === stripos( $string, 'https://' ) ) {
+				$string = 'http://' . $string;
+			} else {
+				$string = $string;
+			}
+
+			$string1 = '<a class="wpbl-pagetd-wpbooklist-purchase-img" href="' . $string  .'" target="_blank"><img src="' . $row->bookimg . '" /></a>';
+
+			return $string1;
+		}
+
+		/** Function to display the price link on a post.
+		 *
+		 *  @param string $string - The string that contains the price.
+		 */
+		public function wpbooklist_add_storefront_calltoaction_post_func( $string ) {
+
+			global $wpdb;
+			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+
+			if ( false === stripos( $string, 'http://' ) && false === stripos( $string, 'https://' ) ) {
+				$string = 'http://' . $string;
+			} else {
+				$string = $string;
+			}
+
+			$string1 = '<div id="wpbl-posttd-book-details-5">
+			<a id="wpbl-posttd-purchase-now-link" href="' . $string . '">' . $row->calltoaction . '</a>
+			</div>';
+
+			return $string1;
+		}
+
+		/** Function to display the image link on a post.
+		 *
+		 *  @param string $string - The string that contains the price.
+		 */
+		public function wpbooklist_add_storefront_bookimg_post_func( $string ) {
+
+			global $wpdb;
+			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+
+			if ( false === stripos( $string, 'http://' ) && false === stripos( $string, 'https://' ) ) {
+				$string = 'http://' . $string;
+			} else {
+				$string = $string;
+			}
+
+			$string1 = '<a class="wpbl-posttd-wpbooklist-purchase-img" href="' . $string  .'" target="_blank"><img src="' . $row->bookimg . '" /></a>';
+
+			return $string1;
+		}
 	}
 endif;
