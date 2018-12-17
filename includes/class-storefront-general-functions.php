@@ -30,6 +30,19 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 
 		}
 
+		/**
+		 * Verifies that the core WPBookList plugin is installed and activated - otherwise, the Extension doesn't load and a message is displayed to the user.
+		 */
+		public function wpbooklist_storefront_core_plugin_required() {
+
+			// Require core WPBookList Plugin.
+			if ( ! is_plugin_active( 'wpbooklist/wpbooklist.php' ) && current_user_can( 'activate_plugins' ) ) {
+
+				// Stop activation redirect and show error.
+				wp_die( 'Whoops! This WPBookList Extension requires the Core WPBookList Plugin to be installed and activated! <br><a target="_blank" href="https://wordpress.org/plugins/wpbooklist/">Download WPBookList Here!</a><br><br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
+			}
+		}
+
 		/** Functions that loads up the menu page entry for this Extension.
 		 *
 		 *  @param array $submenu_array - The array that contains submenu entries to add to.
@@ -72,9 +85,9 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 				$split_string = explode( 'storefront', $existing_string->extensionversions );
 				$first_part   = $split_string[0];
 				$last_part    = substr( $split_string[1], 5 );
-				$new_string   = $first_part . 'storefront' . STOREFRONT_VERSION_NUM . $last_part;
+				$new_string   = $first_part . 'storefront' . WPBOOKLIST_STOREFRONT_VERSION_NUM . $last_part;
 			} else {
-				$new_string = $existing_string->extensionversions . 'storefront' . STOREFRONT_VERSION_NUM;
+				$new_string = $existing_string->extensionversions . 'storefront' . WPBOOKLIST_STOREFRONT_VERSION_NUM;
 			}
 
 			$data         = array(
@@ -102,7 +115,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 				$version      = substr( $split_string[1], 0, 5 );
 
 				// If version number does not match the current version number found in wpbooklist.php, call the Compat class and run upgrade functions.
-				if ( STOREFRONT_VERSION_NUM !== $version ) {
+				if ( WPBOOKLIST_STOREFRONT_VERSION_NUM !== $version ) {
 					require_once STOREFRONT_CLASS_COMPAT_DIR . 'class-storefront-compat-functions.php';
 					$compat_class = new StoreFront_Compat_Functions();
 				}
@@ -154,7 +167,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 		 */
 		public function wpbooklist_storefront_frontend_js() {
 
-			wp_register_script( 'wpbooklist_storefront_frontendjs', STOREFRONT_JS_URL . 'wpbooklist_storefront_frontend.min.js', array( 'jquery' ), STOREFRONT_VERSION_NUM, true );
+			wp_register_script( 'wpbooklist_storefront_frontendjs', STOREFRONT_JS_URL . 'wpbooklist_storefront_frontend.min.js', array( 'jquery' ), WPBOOKLIST_STOREFRONT_VERSION_NUM, true );
 
 			// Next 4-5 lines are required to allow translations of strings that would otherwise live in the wpbooklist-admin-js.js JavaScript File.
 			require_once STOREFRONT_CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-storefront-translations.php';
@@ -184,7 +197,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 		 */
 		public function wpbooklist_storefront_admin_style() {
 
-			wp_register_style( 'wpbooklist_storefront_adminui', STOREFRONT_CSS_URL . 'wpbooklist-storefront-main-admin.css', null, STOREFRONT_VERSION_NUM );
+			wp_register_style( 'wpbooklist_storefront_adminui', STOREFRONT_CSS_URL . 'wpbooklist-storefront-main-admin.css', null, WPBOOKLIST_STOREFRONT_VERSION_NUM );
 			wp_enqueue_style( 'wpbooklist_storefront_adminui' );
 
 		}
@@ -194,7 +207,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 		 */
 		public function wpbooklist_storefront_frontend_style() {
 
-			wp_register_style( 'wpbooklist_storefront_frontendui', STOREFRONT_CSS_URL . 'wpbooklist-storefront-main-frontend.css', null, STOREFRONT_VERSION_NUM );
+			wp_register_style( 'wpbooklist_storefront_frontendui', STOREFRONT_CSS_URL . 'wpbooklist-storefront-main-frontend.css', null, WPBOOKLIST_STOREFRONT_VERSION_NUM );
 			wp_enqueue_style( 'wpbooklist_storefront_frontendui' );
 
 		}
