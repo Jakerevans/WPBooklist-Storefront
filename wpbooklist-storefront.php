@@ -39,7 +39,7 @@ global $wpdb;
 	}
 
 	// This Extension's Version Number.
-	define( 'WPBOOKLIST_STOREFRONT_VERSION_NUM', '6.1.2' );
+	define( 'STOREFRONT_VERSION_NUM', '1.0.0' );
 
 	// Root plugin folder directory.
 	define( 'STOREFRONT_ROOT_DIR', plugin_dir_path( __FILE__ ) );

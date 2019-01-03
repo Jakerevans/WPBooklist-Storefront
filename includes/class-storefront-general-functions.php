@@ -643,7 +643,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 		 */
 		public function wpbooklist_append_to_colorbox_price_func( $string ) {
 
-			$priceactual = $stirng;
+			$priceactual = $string;
 			$stringsplit = [];
 			if ( false !== stripos( $string, '---' ) ) {
 				$stringsplit = explode( '---', $string );
