@@ -183,16 +183,49 @@ global $wpdb;
 	// Function that adds in the License Key Submission form on this Extension's entry on the plugins page.
 	add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $storefront_general_functions, 'wpbooklist_storefront_pluginspage_nonce_entry' ) );
 
-	// Function that loads up the menu page entry for this Extension.
-	add_filter( 'wpbooklist_add_sub_menu', array( $storefront_general_functions, 'wpbooklist_storefront_submenu' ) );
 
-	add_filter( 'wpbooklist_add_to_library_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_library_view_display_options' ) );
 
-	add_filter( 'wpbooklist_add_to_book_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_book_view_display_options' ) );
+global $wpdb;
+$test_name = $wpdb->prefix . 'wpbooklist_storefront_settings';
+if ( $test_name === $wpdb->get_var( "SHOW TABLES LIKE '$test_name'" ) ) {
+	$extension_settings = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_storefront_settings' );
+	if ( false !== stripos( $extension_settings->treh, 'aod' ) ) {
+		// Function that loads up the menu page entry for this Extension.
+		add_filter( 'wpbooklist_add_sub_menu', array( $storefront_general_functions, 'wpbooklist_storefront_submenu' ) );
 
-	add_filter( 'wpbooklist_add_to_posts_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_posts_display_options' ) );
+		add_filter( 'wpbooklist_add_to_library_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_library_view_display_options' ) );
 
-	add_filter( 'wpbooklist_add_to_pages_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_pages_display_options' ) );
+		add_filter( 'wpbooklist_add_to_book_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_book_view_display_options' ) );
+
+		add_filter( 'wpbooklist_add_to_posts_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_posts_display_options' ) );
+
+		add_filter( 'wpbooklist_add_to_pages_display_options', array( $storefront_general_functions, 'wpbooklist_storefront_insert_pages_display_options' ) );
+
+		add_filter( 'wpbooklist_append_to_book_form_storefront_fields', array( $storefront_general_functions, 'wpbooklist_storefront_insert_storefront_fields' ) );
+
+		add_filter( 'wpbooklist_append_to_colorbox_price', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_price_func' ) );
+
+		add_filter( 'wpbooklist_append_to_colorbox_purchase_text_link', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_purchase_text_link_func' ) );
+
+		add_filter( 'wpbooklist_append_to_colorbox_purchase_image_link', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_purchase_image_link_func' ) );
+
+		add_filter( 'wpbooklist_append_to_frontend_library_price_purchase', array( $storefront_general_functions, 'wpbooklist_append_to_frontend_library_price_purchase_func' ) );
+
+		add_filter( 'wpbooklist_append_to_frontend_library_image_purchase', array( $storefront_general_functions, 'wpbooklist_append_to_frontend_library_image_purchase_func' ) );
+
+		add_filter( 'wpbooklist_add_storefront_calltoaction_page', array( $storefront_general_functions, 'wpbooklist_add_storefront_calltoaction_page_func' ) );
+
+		add_filter( 'wpbooklist_add_storefront_bookimg_page', array( $storefront_general_functions, 'wpbooklist_add_storefront_bookimg_page_func' ) );
+
+		add_filter( 'wpbooklist_add_storefront_calltoaction_post', array( $storefront_general_functions, 'wpbooklist_add_storefront_calltoaction_post_func' ) );
+
+		add_filter( 'wpbooklist_add_storefront_bookimg_post', array( $storefront_general_functions, 'wpbooklist_add_storefront_bookimg_post_func' ) );
+	}
+}
+
+
+
+
 
 	// Adding the function that will take our STOREFRONT_NONCES_ARRAY Constant from above and create actual nonces to be passed to Javascript functions.
 	add_action( 'init', array( $storefront_general_functions, 'wpbooklist_storefront_create_nonces' ) );
@@ -238,27 +271,6 @@ global $wpdb;
 
 	// Function that adds in the License Key Submission form on this Extension's entry on the plugins page.
 	add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $storefront_general_functions, 'wpbooklist_storefront_pluginspage_nonce_entry' ) );
-
-	// Function that adds in the HTML into the 'Add a Book' form.
-	add_filter( 'wpbooklist_append_to_book_form_storefront_fields', array( $storefront_general_functions, 'wpbooklist_storefront_insert_storefront_fields' ) );
-
-	add_filter( 'wpbooklist_append_to_frontend_library_price_purchase', array( $storefront_general_functions, 'wpbooklist_append_to_frontend_library_price_purchase_func' ) );
-
-	add_filter( 'wpbooklist_append_to_frontend_library_image_purchase', array( $storefront_general_functions, 'wpbooklist_append_to_frontend_library_image_purchase_func' ) );
-
-	add_filter( 'wpbooklist_append_to_colorbox_price', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_price_func' ) );
-
-	add_filter( 'wpbooklist_append_to_colorbox_purchase_text_link', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_purchase_text_link_func' ) );
-
-	add_filter( 'wpbooklist_append_to_colorbox_purchase_image_link', array( $storefront_general_functions, 'wpbooklist_append_to_colorbox_purchase_image_link_func' ) );
-
-	add_filter( 'wpbooklist_add_storefront_calltoaction_page', array( $storefront_general_functions, 'wpbooklist_add_storefront_calltoaction_page_func' ) );
-
-	add_filter( 'wpbooklist_add_storefront_bookimg_page', array( $storefront_general_functions, 'wpbooklist_add_storefront_bookimg_page_func' ) );
-
-	add_filter( 'wpbooklist_add_storefront_calltoaction_post', array( $storefront_general_functions, 'wpbooklist_add_storefront_calltoaction_post_func' ) );
-
-	add_filter( 'wpbooklist_add_storefront_bookimg_post', array( $storefront_general_functions, 'wpbooklist_add_storefront_bookimg_post_func' ) );
 
 
 

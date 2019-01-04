@@ -123,10 +123,10 @@ gulp.task( 'watch', function() {
 });
 
 // Default gulp task
-gulp.task( 'default', [ 'sassFrontendSource', 'sassBackendSource', 'concatAdminJs', 'concatFrontendJs', 'watch' ]);
+//gulp.task( 'default', [ 'sassFrontendSource', 'sassBackendSource', 'concatAdminJs', 'concatFrontendJs', 'watch' ]);
 
 
-//gulp.task( 'default', [ 'cleanzip' ]);
+gulp.task( 'default', [ 'cleanzip' ]);
 
 //gulp.task( 'default', [ 'copyassets', 'copyincludes', 'copyquotes', 'copyconfig', 'copyreadme', 'copylang', 'copymainfile' ]);
 
