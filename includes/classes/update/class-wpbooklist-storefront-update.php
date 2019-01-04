@@ -54,7 +54,7 @@ if ( ! class_exists( 'WPBookList_Storefront_Update', false ) ) :
 				'version' => WPBOOKLIST_STOREFRONT_VERSION_NUM,
 				'license' => $license_key,
 				'item_id' => EDD_SL_ITEM_ID_STOREFRONT,
-				'author'  => 'Pippin Williamson',
+				'author'  => 'Jake Evans',
 				'url'     => home_url(),
 				'beta'    => false,
 			) );
