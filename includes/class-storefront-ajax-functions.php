@@ -122,7 +122,7 @@ if ( ! class_exists( 'StoreFront_Ajax_Functions', false ) ) :
 			$format       = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
 			$where        = array( 'ID' => 1 );
 			$where_format = array( '%d' );
-			$result       = $wpdb->update( $wpdb->prefix . 'wpbooklist_jre_storefront_options', $data, $where, $format, $where_format );
+			$result       = $wpdb->update( $wpdb->prefix . 'wpbooklist_storefront_settings', $data, $where, $format, $where_format );
 
 			wp_die( $result );
 		}
@@ -165,9 +165,34 @@ if ( ! class_exists( 'StoreFront_Ajax_Functions', false ) ) :
 			$format       = array( '%s', '%s', '%s' );
 			$where        = array( 'ID' => 1 );
 			$where_format = array( '%d' );
-			$response     =  $wpdb->update( $wpdb->prefix . 'wpbooklist_jre_storefront_options', $data, $where, $format, $where_format );
+			$response     =  $wpdb->update( $wpdb->prefix . 'wpbooklist_storefront_settings', $data, $where, $format, $where_format );
 
 			wp_die( $response );
+		}
+
+		/**
+		 * Callback function for handling the saving of the user's License Key.
+		 */
+		public function wpbooklist_storefront_save_license_key_action_callback() {
+
+			global $wpdb;
+
+			check_ajax_referer( 'wpbooklist_storefront_save_license_key_action_callback', 'security' );
+
+			if ( isset( $_POST['license'] ) ) {
+				$license = filter_var( wp_unslash( $_POST['license'] ), FILTER_SANITIZE_STRING );
+			}
+
+			$data         = array(
+				'treh' => $license,
+			);
+			$format       = array( '%s' );
+			$where        = array( 'ID' => 1 );
+			$where_format = array( '%d' );
+			$save_result = $wpdb->update( $wpdb->prefix . 'wpbooklist_storefront_settings', $data, $where, $format, $where_format );
+
+			wp_die( $save_result );
+
 		}
 
 	}

@@ -29,7 +29,7 @@ if ( ! class_exists( 'WPBookList_StoreFront_Form', false ) ) :
 			$this->trans->trans_strings();
 
 			global $wpdb;
-			$row            = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+			$row            = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_storefront_settings' );
 			$call_to_action = $row->calltoaction;
 
 			if ( $this->trans->storefront_trans_27 === $row->libraryimg || false !== strpos( $row->libraryimg, 'placeholder.svg' ) ) {

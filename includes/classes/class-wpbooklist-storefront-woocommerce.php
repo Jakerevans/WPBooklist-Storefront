@@ -107,7 +107,7 @@ if ( ! class_exists( 'WPBookList_StoreFront_WooCommerce', false ) ) :
 			}
 
 			global $wpdb;
-			$table = $wpdb->prefix . 'wpbooklist_jre_storefront_options';
+			$table = $wpdb->prefix . 'wpbooklist_storefront_settings';
 			$row   = $wpdb->get_row( "SELECT * FROM $table" );
 
 			// If we're creating a new product - otherwise, we're editing an existing one.

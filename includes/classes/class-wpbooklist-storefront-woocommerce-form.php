@@ -43,7 +43,7 @@ if ( ! class_exists( 'WPBookList_Storefront_WooCommerce_Form', false ) ) :
 			$string4 = '';
 
 			// Get saved settings.
-			$settings = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+			$settings = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_storefront_settings' );
 
 			// Getting all WooCommerce Published Products.
 			$all_product_data = $wpdb->get_results( 'SELECT * FROM `' . $wpdb->prefix . "posts` where post_type='product' and post_status = 'publish'" );

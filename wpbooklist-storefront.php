@@ -10,8 +10,8 @@
  * @wordpress-plugin
  * Plugin Name: WPBookList StoreFront Extension
  * Plugin URI: https://www.jakerevans.com
- * Description: The WPBookList StoreFront extension allows you to link each title to where they're being sold by displaying prominent and attractive purchase buttons and text links.
- * Version: 6.0.0
+ * Description: The WPBookList StoreFront extension allows the automatic creation of WooCommerce products when adding a book, as well as various other sales otpions - linking to where books are sold, displaying pricing info, etc.
+ * Version: 1.0.0
  * Author: Jake Evans
  * Text Domain: wpbooklist
  * Author URI: https://www.jakerevans.com
@@ -29,23 +29,35 @@ global $wpdb;
 /* REQUIRE STATEMENTS */
 	require_once 'includes/class-storefront-general-functions.php';
 	require_once 'includes/class-storefront-ajax-functions.php';
+	require_once 'includes/classes/update/class-wpbooklist-storefront-update.php';
 /* END REQUIRE STATEMENTS */
 
 /* CONSTANT DEFINITIONS */
 
 	// Root plugin folder directory.
 	if ( ! defined('WPBOOKLIST_VERSION_NUM' ) ) {
-		define( 'WPBOOKLIST_VERSION_NUM', '6.1.2' );
+		define( 'WPBOOKLIST_VERSION_NUM', '6.1.5' );
 	}
 
+	// This is the URL our updater / license checker pings. This should be the URL of the site with EDD installed.
+	define( 'EDD_SL_STORE_URL_STOREFRONT', 'https://wpbooklist.com' );
+
+	// The id of your product in EDD.
+	define( 'EDD_SL_ITEM_ID_STOREFRONT', 713 );
+
 	// This Extension's Version Number.
-	define( 'STOREFRONT_VERSION_NUM', '1.0.0' );
+	define( 'WPBOOKLIST_STOREFRONT_VERSION_NUM', '1.0.0' );
 
 	// Root plugin folder directory.
 	define( 'STOREFRONT_ROOT_DIR', plugin_dir_path( __FILE__ ) );
 
-	// Root WordPress Plugin Directory.
-	define( 'STOREFRONT_ROOT_WP_PLUGINS_DIR', str_replace( '/wpbooklist-storefront', '', plugin_dir_path( __FILE__ ) ) );
+	// Root WordPress Plugin Directory. The If is for taking into account the update process - a temp folder gets created when updating, which temporarily replaces the 'wpbooklist-bulkbookupload' folder.
+	if ( false !== stripos( plugin_dir_path( __FILE__ ) , '/wpbooklist-storefront' ) ) { 
+		define( 'STOREFRONT_ROOT_WP_PLUGINS_DIR', str_replace( '/wpbooklist-storefront', '', plugin_dir_path( __FILE__ ) ) );
+	} else {
+		$temp = explode( 'plugins/', plugin_dir_path( __FILE__ ) );
+		define( 'STOREFRONT_ROOT_WP_PLUGINS_DIR', $temp[0] . 'plugins/' );
+	}
 
 	// Root WPBL Dir.
 	if ( ! defined('ROOT_WPBL_DIR' ) ) {
@@ -87,6 +99,9 @@ global $wpdb;
 
 	// Root Classes Directory.
 	define( 'STOREFRONT_CLASS_DIR', STOREFRONT_ROOT_DIR . 'includes/classes/' );
+
+	// Root Update Directory.
+	define( 'STOREFRONT_UPDATE_DIR', STOREFRONT_CLASS_DIR . 'update/' );
 
 	// Root Image Icons DIR of this extension.
 	define('STOREFRONT_ROOT_IMG_DIR', STOREFRONT_ROOT_DIR . 'assets/img/');
@@ -135,6 +150,7 @@ global $wpdb;
 		wp_json_encode(array(
 			'adminnonce1' => 'wpbooklist_storefront_settings_action_callback',
 			'adminnonce2' => 'wpbooklist_save_woocommerce_storefront_settings_action_callback',
+			'adminnonce3' => 'wpbooklist_storefront_save_license_key_action_callback',
 		))
 	);
 
@@ -155,11 +171,17 @@ global $wpdb;
 	// Call the class found in wpbooklist-functions.php.
 	$storefront_ajax_functions = new StoreFront_Ajax_Functions();
 
+	// Include the Update Class.
+	$storefront_update_functions = new WPBookList_Storefront_Update();
+
 
 /* END CLASS INSTANTIATIONS */
 
 
 /* FUNCTIONS FOUND IN CLASS-WPBOOKLIST-GENERAL-FUNCTIONS.PHP THAT APPLY PLUGIN-WIDE */
+
+	// Function that adds in the License Key Submission form on this Extension's entry on the plugins page.
+	add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $storefront_general_functions, 'wpbooklist_storefront_pluginspage_nonce_entry' ) );
 
 	// Function that loads up the menu page entry for this Extension.
 	add_filter( 'wpbooklist_add_sub_menu', array( $storefront_general_functions, 'wpbooklist_storefront_submenu' ) );
@@ -208,6 +230,15 @@ global $wpdb;
 	// Function to add purchase images to the media library upon activation.
 	register_activation_hook( __FILE__, array( $storefront_general_functions, 'wpbooklist_jre_storefront_add_purchase_images' ) );
 
+	// And in the darkness bind them.
+	add_filter( 'admin_footer', array( $storefront_general_functions, 'wpbooklist_storefront_smell_rose' ) );
+
+	// Displays the 'Enter Your License Key' message at the top of the dashboard if the user hasn't done so already.
+	add_action( 'admin_notices', array( $storefront_general_functions, 'wpbooklist_storefront_top_dashboard_license_notification' ) );
+
+	// Function that adds in the License Key Submission form on this Extension's entry on the plugins page.
+	add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $storefront_general_functions, 'wpbooklist_storefront_pluginspage_nonce_entry' ) );
+
 	// Function that adds in the HTML into the 'Add a Book' form.
 	add_filter( 'wpbooklist_append_to_book_form_storefront_fields', array( $storefront_general_functions, 'wpbooklist_storefront_insert_storefront_fields' ) );
 
@@ -242,7 +273,8 @@ global $wpdb;
 
 	add_action( 'wp_ajax_wpbooklist_save_woocommerce_storefront_settings_action', array( $storefront_ajax_functions, 'wpbooklist_save_woocommerce_storefront_settings_action_callback' ) );
 
-
+	// Callback function for handling the saving of the user's License Key.
+	add_action( 'wp_ajax_wpbooklist_storefront_save_license_key_action', array( $storefront_ajax_functions, 'wpbooklist_storefront_save_license_key_action_callback' ) );
 	
 
 

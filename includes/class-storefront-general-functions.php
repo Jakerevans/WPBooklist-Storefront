@@ -72,9 +72,9 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 				$split_string = explode( 'storefront', $existing_string->extensionversions );
 				$first_part   = $split_string[0];
 				$last_part    = substr( $split_string[1], 5 );
-				$new_string   = $first_part . 'storefront' . STOREFRONT_VERSION_NUM . $last_part;
+				$new_string   = $first_part . 'storefront' . WPBOOKLIST_STOREFRONT_VERSION_NUM . $last_part;
 			} else {
-				$new_string = $existing_string->extensionversions . 'storefront' . STOREFRONT_VERSION_NUM;
+				$new_string = $existing_string->extensionversions . 'storefront' . WPBOOKLIST_STOREFRONT_VERSION_NUM;
 			}
 
 			$data         = array(
@@ -102,7 +102,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 				$version      = substr( $split_string[1], 0, 5 );
 
 				// If version number does not match the current version number found in wpbooklist.php, call the Compat class and run upgrade functions.
-				if ( STOREFRONT_VERSION_NUM !== $version ) {
+				if ( WPBOOKLIST_STOREFRONT_VERSION_NUM !== $version ) {
 					require_once STOREFRONT_CLASS_COMPAT_DIR . 'class-storefront-compat-functions.php';
 					$compat_class = new StoreFront_Compat_Functions();
 				}
@@ -146,7 +146,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 		 */
 		public function wpbooklist_storefront_frontend_js() {
 
-			wp_register_script( 'wpbooklist_storefront_frontendjs', STOREFRONT_JS_URL . 'wpbooklist_storefront_frontend.min.js', array( 'jquery' ), STOREFRONT_VERSION_NUM, true );
+			wp_register_script( 'wpbooklist_storefront_frontendjs', STOREFRONT_JS_URL . 'wpbooklist_storefront_frontend.min.js', array( 'jquery' ), WPBOOKLIST_STOREFRONT_VERSION_NUM, true );
 
 			// Next 4-5 lines are required to allow translations of strings that would otherwise live in the wpbooklist-admin-js.js JavaScript File.
 			require_once STOREFRONT_CLASS_TRANSLATIONS_DIR . 'class-wpbooklist-storefront-translations.php';
@@ -176,7 +176,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 		 */
 		public function wpbooklist_storefront_admin_style() {
 
-			wp_register_style( 'wpbooklist_storefront_adminui', STOREFRONT_CSS_URL . 'wpbooklist-storefront-main-admin.css', null, STOREFRONT_VERSION_NUM );
+			wp_register_style( 'wpbooklist_storefront_adminui', STOREFRONT_CSS_URL . 'wpbooklist-storefront-main-admin.css', null, WPBOOKLIST_STOREFRONT_VERSION_NUM );
 			wp_enqueue_style( 'wpbooklist_storefront_adminui' );
 
 		}
@@ -186,7 +186,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 		 */
 		public function wpbooklist_storefront_frontend_style() {
 
-			wp_register_style( 'wpbooklist_storefront_frontendui', STOREFRONT_CSS_URL . 'wpbooklist-storefront-main-frontend.css', null, STOREFRONT_VERSION_NUM );
+			wp_register_style( 'wpbooklist_storefront_frontendui', STOREFRONT_CSS_URL . 'wpbooklist-storefront-main-frontend.css', null, WPBOOKLIST_STOREFRONT_VERSION_NUM );
 			wp_enqueue_style( 'wpbooklist_storefront_frontendui' );
 
 		}
@@ -196,7 +196,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 		 */
 		public function wpbooklist_storefront_register_table_name() {
 			global $wpdb;
-			$wpdb->wpbooklist_jre_storefront_options = "{$wpdb->prefix}wpbooklist_jre_storefront_options";
+			$wpdb->wpbooklist_storefront_settings = "{$wpdb->prefix}wpbooklist_storefront_settings";
 		}
 
 		/**
@@ -227,7 +227,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 			$purchasetext = $this->storefront_trans->storefront_trans_22 . '!';
 
 			// Creating the table.
-			$sql_create_table = "CREATE TABLE {$wpdb->wpbooklist_jre_storefront_options} 
+			$sql_create_table = "CREATE TABLE {$wpdb->wpbooklist_storefront_settings} 
 			(
 				ID bigint(190) auto_increment,
 				calltoaction varchar(190) NOT NULL DEFAULT '$purchasetext',
@@ -250,12 +250,13 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 				defaultvirtual varchar(255),
 				defaultdownload varchar(255),
 				defaultreviews varchar(255),
+				treh varchar(255),
 				PRIMARY KEY  (ID),
-				  KEY title (calltoaction)
+				  KEY calltoaction (calltoaction)
 			) $charset_collate; ";
 			dbDelta( $sql_create_table );
 
-			$table_name = $wpdb->prefix . 'wpbooklist_jre_storefront_options';
+			$table_name = $wpdb->prefix . 'wpbooklist_storefront_settings';
 			$wpdb->insert( $table_name, array( 'ID' => 1 ) );
 		}
 
@@ -273,8 +274,8 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 			$string4            = '';
 
 			// Get saved settings.
-			$settings_table = $wpdb->prefix . 'wpbooklist_jre_storefront_options';
-			$settings       = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+			$settings_table = $wpdb->prefix . 'wpbooklist_storefront_settings';
+			$settings       = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_storefront_settings' );
 
 			// Getting all WooCommerce Published Products.
 			$all_product_data = $wpdb->get_results( "SELECT * FROM `" . $wpdb->prefix . "posts` where post_type='product' and post_status = 'publish'" );
@@ -576,7 +577,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 
 			// Get saved purcahse image.
 			global $wpdb;
-			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_storefront_settings' );
 
 			if ( null !== $string[0] ) {
 
@@ -681,7 +682,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 
 			// Get saved purcahse image.
 			global $wpdb;
-			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options');
+			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_storefront_settings');
 
 			$string1 = ' id="wpbooklist-purchase-book-view" href="' . $string . '">' . $row->calltoaction . '</a';
 
@@ -696,7 +697,7 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 
 			// Get saved purchase image.
 			global $wpdb;
-			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_jre_storefront_options' );
+			$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_storefront_settings' );
 
 			if ( ( false !== strpos( $row->bookimg, 'http://' ) || false !== strpos( $row->bookimg, 'https://' ) ) && false === strpos( $row->bookimg, 'book-placeholder.png' ) ) {
 
@@ -712,6 +713,261 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 			}
 
 			return $string1;
+		}
+
+		/**
+		 * Verifies the crown of the rose.
+		 *
+		 * @param  array $plugins List of plugins to activate & load.
+		 */
+		public function wpbooklist_storefront_smell_rose() {
+
+			global $wpdb;
+
+			// Get license key from plugin options, if it's already been saved. If it has, don't display anything.
+			$this->extension_settings = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_storefront_settings' );
+
+			// If the License Key just hasn't been entered yet...
+			if ( null === $this->extension_settings->treh || '' === $this->extension_settings->treh ) {
+				return;
+			} else {
+
+				if ( false !== stripos( $this->extension_settings->treh, '---' ) ) {
+
+					$temp = explode( '---', $this->extension_settings->treh );
+
+					if ( 'aod' === $temp[1] ) {
+
+						// Get the date.
+						require_once ROOT_WPBL_UTILITIES_DIR . 'class-wpbooklist-utilities-date.php';
+						$utilities_date = new WPBookList_Utilities_Date();
+						$this->date     = $utilities_date->wpbooklist_get_date_via_current_time( 'timestamp' );
+
+						if ( 604800 < ( $this->date - (int) $temp[2] ) ) {
+
+							$checker_good_flag = false;
+
+							$san_check = wp_remote_get( 'https://wpbooklist.com/?edd_action=activate_license&item_id=' . EDD_SL_ITEM_ID_STOREFRONT . '&license=' . $temp[0] . '&url=' . get_site_url() );
+
+							// Check the response code.
+							$response_code    = wp_remote_retrieve_response_code( $san_check );
+							$response_message = wp_remote_retrieve_response_message( $san_check );
+
+							if ( 200 !== $response_code && ! empty( $response_message ) ) {
+								return new WP_Error( $response_code, $response_message );
+							} elseif ( 200 !== $response_code ) {
+								$this->apireport = $this->apireport . 'Unknown error occurred with wp_remote_get() trying to build Books-a-Million link in the create_buy_links() function ';
+								return new WP_Error( $response_code, 'Unknown error occurred with wp_remote_get() trying to build Books-a-Million link in the create_buy_links() function' );
+							} else {
+								$san_check = wp_remote_retrieve_body( $san_check );
+								$san_check = json_decode( $san_check, true );
+
+								if ( 'valid' === $san_check['license'] && $san_check['success'] ) {
+
+									$this->date = $utilities_date->wpbooklist_get_date_via_current_time( 'timestamp' );
+
+									$data         = array(
+										'treh' => $temp[0] . '---aod---' . $this->date,
+									);
+									$format       = array( '%s' );
+									$where        = array( 'ID' => 1 );
+									$where_format = array( '%d' );
+									$save_result = $wpdb->update( $wpdb->prefix . 'wpbooklist_storefront_settings', $data, $where, $format, $where_format );
+
+									$checker_good_flag = true;
+								} else {
+									$data         = array(
+										'treh' => '',
+									);
+									$format       = array( '%s' );
+									$where        = array( 'ID' => 1 );
+									$where_format = array( '%d' );
+									$save_result = $wpdb->update( $wpdb->prefix . 'wpbooklist_storefront_settings', $data, $where, $format, $where_format );
+								}
+							}
+
+							if ( ! $checker_good_flag ) {
+								deactivate_plugins( STOREFRONT_ROOT_DIR . 'wpbooklist-storefront.php' );
+								return;
+							}
+						} else {
+							return;
+						}
+					} else {
+
+						$checker_good_flag = false;
+
+						$san_check = wp_remote_get( 'https://wpbooklist.com/?edd_action=activate_license&item_id=' . EDD_SL_ITEM_ID_STOREFRONT . '&license=' . $this->extension_settings->treh . '&url=' . get_site_url() );
+
+						// Check the response code.
+						$response_code    = wp_remote_retrieve_response_code( $san_check );
+						$response_message = wp_remote_retrieve_response_message( $san_check );
+
+						if ( 200 !== $response_code && ! empty( $response_message ) ) {
+							return new WP_Error( $response_code, $response_message );
+						} elseif ( 200 !== $response_code ) {
+							$this->apireport = $this->apireport . 'Unknown error occurred with wp_remote_get() trying to build Books-a-Million link in the create_buy_links() function ';
+							return new WP_Error( $response_code, 'Unknown error occurred with wp_remote_get() trying to build Books-a-Million link in the create_buy_links() function' );
+						} else {
+							$san_check = wp_remote_retrieve_body( $san_check );
+							$san_check = json_decode( $san_check, true );
+
+							if ( 'valid' === $san_check['license'] && $san_check['success'] ) {
+
+								// Get the date.
+								require_once ROOT_WPBL_UTILITIES_DIR . 'class-wpbooklist-utilities-date.php';
+								$utilities_date = new WPBookList_Utilities_Date();
+								$this->date     = $utilities_date->wpbooklist_get_date_via_current_time( 'timestamp' );
+
+								$data         = array(
+									'treh' => $this->extension_settings->treh . '---aod---' . $this->date,
+								);
+								$format       = array( '%s' );
+								$where        = array( 'ID' => 1 );
+								$where_format = array( '%d' );
+								$save_result = $wpdb->update( $wpdb->prefix . 'wpbooklist_storefront_settings', $data, $where, $format, $where_format );
+
+								$checker_good_flag = true;
+
+							} else {
+								$data         = array(
+									'treh' => '',
+								);
+								$format       = array( '%s' );
+								$where        = array( 'ID' => 1 );
+								$where_format = array( '%d' );
+								$save_result = $wpdb->update( $wpdb->prefix . 'wpbooklist_storefront_settings', $data, $where, $format, $where_format );
+							}
+						}
+
+						if ( ! $checker_good_flag ) {
+							deactivate_plugins( STOREFRONT_ROOT_DIR . 'wpbooklist-storefront.php' );
+							return;
+						}
+					}
+				} else {
+
+					$checker_good_flag = false;
+
+					$san_check = wp_remote_get( 'https://wpbooklist.com/?edd_action=activate_license&item_id=' . EDD_SL_ITEM_ID_STOREFRONT . '&license=' . $this->extension_settings->treh . '&url=' . get_site_url() );
+
+					// Check the response code.
+					$response_code    = wp_remote_retrieve_response_code( $san_check );
+					$response_message = wp_remote_retrieve_response_message( $san_check );
+
+					if ( 200 !== $response_code && ! empty( $response_message ) ) {
+						return new WP_Error( $response_code, $response_message );
+					} elseif ( 200 !== $response_code ) {
+						$this->apireport = $this->apireport . 'Unknown error occurred with wp_remote_get() trying to build Books-a-Million link in the create_buy_links() function ';
+						return new WP_Error( $response_code, 'Unknown error occurred with wp_remote_get() trying to build Books-a-Million link in the create_buy_links() function' );
+					} else {
+						$san_check = wp_remote_retrieve_body( $san_check );
+						$san_check = json_decode( $san_check, true );
+
+						if ( 'valid' === $san_check['license'] && $san_check['success'] ) {
+
+							// Get the date.
+							require_once ROOT_WPBL_UTILITIES_DIR . 'class-wpbooklist-utilities-date.php';
+							$utilities_date = new WPBookList_Utilities_Date();
+							$this->date     = $utilities_date->wpbooklist_get_date_via_current_time( 'timestamp' );
+
+							$data         = array(
+								'treh' => $this->extension_settings->treh . '---aod---' . $this->date,
+							);
+							$format       = array( '%s' );
+							$where        = array( 'ID' => 1 );
+							$where_format = array( '%d' );
+							$save_result = $wpdb->update( $wpdb->prefix . 'wpbooklist_storefront_settings', $data, $where, $format, $where_format );
+
+							$checker_good_flag = true;
+
+						} else {
+							$data         = array(
+								'treh' => '',
+							);
+							$format       = array( '%s' );
+							$where        = array( 'ID' => 1 );
+							$where_format = array( '%d' );
+							$save_result = $wpdb->update( $wpdb->prefix . 'wpbooklist_storefront_settings', $data, $where, $format, $where_format );
+						}
+					}
+
+					if ( ! $checker_good_flag ) {
+						deactivate_plugins( STOREFRONT_ROOT_DIR . 'wpbooklist-storefront.php' );
+
+						if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+							//header( 'Location: ' . filter_var( wp_unslash( $_SERVER['REQUEST_URI'] ), FILTER_SANITIZE_STRING ) );
+						}
+
+						return;
+					}
+				}
+			}
+		}
+
+		/**
+		 * Displays the 'Enter Your License Key' message at the top of the dashboard if the user hasn't done so already.
+		 */
+		public function wpbooklist_storefront_top_dashboard_license_notification() {
+
+			global $wpdb;
+
+			// Get license key from plugin options, if it's already been saved. If it has, don't display anything.
+			$this->extension_settings = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_storefront_settings' );
+
+			if ( null === $this->extension_settings->treh || '' === $this->extension_settings->treh ) {
+
+				require_once ROOT_WPBL_TRANSLATIONS_DIR . 'class-wpbooklist-translations.php';
+				$trans = new WPBookList_Translations();
+
+				echo '
+				<div class="notice notice-success is-dismissible">
+					<form class="wpbooklist-extension-genreric-key-dashboard-form" id="wpbooklist-extension-genreric-key-dashboard-form-storefront">
+						<p class="wpbooklist-extension-genreric-key-dashboard-title">' . $trans->trans_627 . '</p>
+						<input id="wpbooklist-extension-genreric-key-dashboard-input-storefront" class="wpbooklist-extension-genreric-key-dashboard-input" type="text" placeholder="' . $trans->trans_613 . '" value="' . $trans->trans_613 . '"></input>
+						<button data-ext="storefront" id="wpbooklist-extension-genreric-key-dashboard-button-storefront" class="wpbooklist-extension-genreric-key-dashboard-button">' . $trans->trans_616 . '</button>
+					</form>
+				</div>';
+			}
+		}
+
+		/**
+		 * Adds in the 'Enter License Key' text input and submit button.
+		 *
+		 * @param  array $links List of existing plugin action links.
+		 * @return array List of modified plugin action links.
+		 */
+		public function wpbooklist_storefront_pluginspage_nonce_entry( $links ) {
+
+			global $wpdb;
+
+			require_once ROOT_WPBL_TRANSLATIONS_DIR . 'class-wpbooklist-translations.php';
+			$trans = new WPBookList_Translations();
+
+			$this->extension_settings = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'wpbooklist_storefront_settings' );
+
+			if ( null === $this->extension_settings->treh || '' === $this->extension_settings->treh ) {
+				$value = $trans->trans_613;
+			} else {
+
+				if ( false !== stripos( $this->extension_settings->treh, '---' ) ) {
+					$temp  = explode( '---', $this->extension_settings->treh );
+					$value = $temp[0];
+				} else {
+					$value = $this->extension_settings->treh;
+				}
+			}
+
+			$form_html = '
+				<form>
+					<input id="wpbooklist-extension-genreric-key-plugins-page-input-storefront" class="wpbooklist-extension-genreric-key-plugins-page-input" type="text" placeholder="' . $trans->trans_613 . '" value="' . $value . '"></input>
+					<button id="wpbooklist-extension-genreric-key-plugins-page-button-storefront" class="wpbooklist-extension-genreric-key-plugins-page-button">' . $trans->trans_614 . '</button>
+				</form>';
+
+			array_push( $links, $form_html );
+
+			return $links;
+
 		}
 
 
