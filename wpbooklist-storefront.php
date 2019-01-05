@@ -11,7 +11,7 @@
  * Plugin Name: WPBookList StoreFront Extension
  * Plugin URI: https://www.jakerevans.com
  * Description: The WPBookList StoreFront extension allows the automatic creation of WooCommerce products when adding a book, as well as various other sales otpions - linking to where books are sold, displaying pricing info, etc.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Jake Evans
  * Text Domain: wpbooklist
  * Author URI: https://www.jakerevans.com
@@ -46,7 +46,7 @@ global $wpdb;
 	define( 'EDD_SL_ITEM_ID_STOREFRONT', 713 );
 
 	// This Extension's Version Number.
-	define( 'WPBOOKLIST_STOREFRONT_VERSION_NUM', '1.0.0' );
+	define( 'WPBOOKLIST_STOREFRONT_VERSION_NUM', '1.0.1' );
 
 	// Root plugin folder directory.
 	define( 'STOREFRONT_ROOT_DIR', plugin_dir_path( __FILE__ ) );
