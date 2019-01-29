@@ -30,6 +30,19 @@ if ( ! class_exists( 'StoreFront_General_Functions', false ) ) :
 
 		}
 
+		/**
+		 * Verifies that the core WPBookList plugin is installed and activated - otherwise, the Extension doesn't load and a message is displayed to the user.
+		 */
+		public function wpbooklist_storefront_core_plugin_required() {
+
+			// Require core WPBookList Plugin.
+			if ( ! is_plugin_active( 'wpbooklist/wpbooklist.php' ) && current_user_can( 'activate_plugins' ) ) {
+
+				// Stop activation redirect and show error.
+				wp_die( 'Whoops! This WPBookList Extension requires the Core WPBookList Plugin to be installed and activated! <br><a target="_blank" href="https://wordpress.org/plugins/wpbooklist/">Download WPBookList Here!</a><br><br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>' );
+			}
+		}
+
 		/** Functions that loads up the menu page entry for this Extension.
 		 *
 		 *  @param array $submenu_array - The array that contains submenu entries to add to.
